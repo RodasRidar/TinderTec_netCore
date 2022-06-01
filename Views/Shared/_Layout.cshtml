@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Tindertec" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tindertec</title>
+    <link rel="icon" type="image/png" href="~/css/tindertec_logo1.png"> 
+    <link rel="stylesheet" href="~/css/style.css"  asp-append-version="true">
+    <link rel="stylesheet" href="~/css/media.css" asp-append-version="true">
+</head>
+<body>
+    <div class="container-noBT">
+    <div class="first-partition">
+
+        <div class="content-profile" style="background-image: url(@ViewBag.fotoURL);">
+        </div>
+        <span class="nombre-profile">
+            <h2>@ViewBag.nombre,@ViewBag.edad</h2>
+        </span>
+        <nav class="menuContainer ">
+            <ol class="menuDetails">
+                <li>
+                 @Html.ActionLink("Inicio", "Index", "Usuario")
+                </li>
+                
+                <li>
+                 @Html.ActionLink("Perfil", "Perfil", "Usuario")
+                </li>
+                <li>
+                 @Html.ActionLink("Chats", "Chats", "Usuario")
+                </li>
+                <li>
+                  @Html.ActionLink("Me Gustas", "MeGustas", "Usuario")
+                </li>
+                <li>
+                    @Html.ActionLink("Subscripcion", "Subscripcion", "Usuario")
+                </il>
+                <li>
+                    <a class="link" >Configuracion</a>       
+                </il>
+                <li>
+                    <a class="link link-cerrar-sesion" >Cerrar Sesion</a>       
+                </il>
+            </ol>
+     </nav>
+    </div>
+    <div class="second-partition">
+        <div class="app">
+            @RenderBody()
+        </div>
+        <header class="header">
+            <div class="logoContainer">
+                    <a href="index.html"  class="logo">
+                        <img src="~/css/tindertec_logo1.png" class="logoImg">
+                    </a>
+            </div>
+        </header>
+    
+        <div class="container-tindertec">
+        </div>
+    
+        <footer class="footer">
+            <a href="index.html" target="_blank">Tindertec  ©  2022 Todos los derechos reservados.</a>
+        </footer>
+    
+    </div>
+</div>
+
+  
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

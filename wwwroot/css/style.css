@@ -1,0 +1,192 @@
+
+@charset "utf-8";
+
+*{
+   
+    font-family: ProximaNova,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji;
+
+} 
+
+body{
+    
+    /* background-color:rgb(3, 27, 41); */
+    background-color: rgb(0, 24, 40);
+    margin: 0;
+    font-family: ProximaNova,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji;
+}
+
+.container-tindertec {
+    height: 88%;
+    /*background-image: url(https://tinder.com/static/build/590275fec8cbbb0de80caa66c8450906.webp);*/
+
+    opacity: 80%;
+    filter: blur(2px);
+    background: linear-gradient(45deg,#fd267a,#ff6036);
+}
+.container-noBT{
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.match_head_container{
+    margin: 5px;
+    border: 1px solid #FF4458;
+    background-color: #FF4458;
+    border-radius: 17px;
+    text-align: center;
+}
+.lista-match-container{
+    width:inherit; 
+    max-height:500px; 
+    overflow-y: scroll;
+}
+.lista-chat-container{
+    width:inherit; 
+    max-height:450px;
+    overflow-y: scroll;
+}
+.app{
+
+    position: absolute;
+    Z-INDEX: 1;
+    height: 60vh;
+    width: 60vw;
+    border: 1px solid black;
+    margin-top: 21vh;
+    margin-left: 10vw;
+}
+.match{
+    display: flex;
+    flex-direction: row;
+}
+
+.app_match_container{
+    background-color: #F0F2F4;
+    width: 25%;
+}
+.app_chats_container{
+    background-color: #F0F2F4;
+    width: 75%;
+    }
+.img_profile_chat{
+    border-radius: 50%;
+
+    height: 50px;
+    margin: 0px 14px 0px 0px;
+}
+.users_matchs{
+    margin-top: 5%;
+}
+.content-profile{
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwaaCroFl3_uEHatKEllvlY2oQoCKfveCpHA&usqp=CAU);  
+
+margin-left: auto;
+margin-right: auto;
+margin-top: 15vh;
+height: 100px;
+width: 100px;
+/* los siguientes valores son independientes del tamaño del círculo */
+background-repeat: no-repeat;
+background-position: 50%;
+border-radius: 50%;
+background-size: 100% auto;
+
+}
+
+.like-img{
+    
+}
+
+.first-partition {
+    width:20vw;
+    background-color: #F0F2F4;
+    padding: 0px;
+    box-shadow: 10px 11px 16px -6px black;
+
+}
+
+.second-partition {
+    width: 80vw;
+    padding: 0px;
+    display: block;
+   
+
+}
+
+.logoImg{
+    height: 4vh;
+    margin: 12px;
+}
+.logoContainer{
+    text-align: center;
+}
+
+.logo{
+    height: 4vh;
+}
+
+.header{
+    height: 7vh;
+    background-color: #FFFFFF;
+    box-shadow: 0px 5px 9px -4px black;
+}
+.footer{
+    height: 5vh;
+    background-color: #FFFFFF;
+    text-align: center;
+    box-shadow: 16px 7px 14px 6px black;
+    
+}
+
+.footer a {
+    justify-content: center;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px;
+    color: #000;
+}
+
+.menuContainer{
+
+margin-top: 15vh;
+
+
+}
+
+.menuDetails{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.menuDetails li{
+
+
+    margin-top: 20px;
+    max-width: 170px;
+    border: 1px solid #FF4458;
+    background: linear-gradient(to right, #fc4d6a, #fc655d,#fc3177);  ;
+    border-radius: 17px;
+    padding: 8px 0px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+.menuDetails li a {
+    list-style: none;
+    text-decoration:none;
+}
+
+.link-cerrar-sesion{
+    margin-top: 80px;
+}
+
+.nombre-profile{
+    text-align: center;
+}
