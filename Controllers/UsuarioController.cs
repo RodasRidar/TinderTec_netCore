@@ -1,20 +1,21 @@
 ﻿using AppWeb_TinderTec.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 
 namespace AppWeb_TinderTec.Controllers
 {
-    public class MeGustasController : Controller
+    public class UsuarioController : Controller
     {
         string cadena;
         private IConfiguration Configuration;
 
-        public MeGustasController(IConfiguration _configuration)
+        public UsuarioController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbHansel");
+           // cadena = this.Configuration.GetConnectionString("myDbPierina");
+            cadena = this.Configuration.GetConnectionString("myDbAriana");
         }
-
 
         private void recuperarUsuario()
         {
@@ -25,12 +26,21 @@ namespace AppWeb_TinderTec.Controllers
             ViewBag.edad = usu.edad;
             ViewBag.fotoURL = usu.foto1;
         }
-
-        //Realizar metodos para LA VISTA  MANTENER ME GUSTAS
-        //AUTOR :Hansel
-        public IActionResult Megustas()
+        //Realizar metodos para LA VISTA MANTENER USUARIO 
+        //AUTOR :PIERINA
+        public IActionResult MantenerUsuario()
         {
             recuperarUsuario();
+            return View();
+        }
+
+
+
+        //Realizar metodos para LA VISTA REGISTRO USUARIO 
+        //AUTOR :ARIANA
+        public IActionResult RegistrarUsuario()
+        {
+
             return View();
         }
     }

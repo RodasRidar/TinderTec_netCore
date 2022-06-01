@@ -3,82 +3,51 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AppWeb_TinderTec.Models;
+using AppWeb_TinderTec.Controllers;
+using Newtonsoft.Json;
 
 namespace AppWeb_TinderTec.Controllers
 {
     public class BuscarAmistadController : Controller
     {
+        string cadena;
+        private IConfiguration Configuration;
 
-        string cadena = @"Server =DESKTOP-N47UO59;Database= TinderTecBD;Trusted_Connection = true;MultipleActiveResultSets = True;TrustServerCertificate = False;Encrypt = False";
-        //string cadena = @"Server =DESKTOP-ME3NR94;Database= TinderTecBD;Trusted_Connection = true;MultipleActiveResultSets = True;TrustServerCertificate = False;Encrypt = False";
-
-        Usuario CargarUsuario(string id)
-
+        public BuscarAmistadController(IConfiguration _configuration)
         {
-           Usuario usu= new Usuario();
-            
-            using (SqlConnection cn = new SqlConnection(cadena))
-            {
-                SqlCommand cmd = new SqlCommand("select top 1 nombres,fecha_naci from tb_clientes where cod_usu =@cod", cn);
-                cmd.Parameters.AddWithValue("@cod", id);
-                cn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    usu.nombres = dr.GetString(0);
-                    usu.fecha_naci = dr.GetDateTime(1);
-
-                }
-               
-                cn.Close();
-                dr.Close();
-                return usu;
-            }
-
-        }
-        /*
-        public async Task<IActionResult> Index()
-        {
-            Usuario usuario = new Usuario();
-            
-            //ViewBag.nombres = CargarUsuario("RICAR").First().nombres;
-
-            return View(await Task.Run(() => CargarUsuario("RICAR")));
-        }*/
-
-        public async Task<IActionResult> Perfil()
-        {
-            Usuario usuario = new Usuario();
-
-            //ViewBag.nombres = CargarUsuario("RICAR").First().nombres;
-
-            return View(await Task.Run(() => CargarUsuario("RICAR")));
+            Configuration = _configuration;
+            cadena = this.Configuration.GetConnectionString("myDbRichardWork");
+            //cadena = this.Configuration.GetConnectionString("myDbJorge");
         }
 
-        public async Task<IActionResult> Chats()
+        private void recuperarUsuario()
         {
-            Usuario usuario = new Usuario();
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("usuario"));
 
-            //ViewBag.nombres = CargarUsuario("RICAR").First().nombres;
-
-            return View(await Task.Run(() => CargarUsuario("RICAR")));
+            ViewBag.nombre = usu.nombres;
+            ViewBag.edad = usu.edad;
+            ViewBag.fotoURL = usu.foto1;
         }
 
-        public async Task<IActionResult> MeGustas()
+        //Realizar metodos para LA VSITA BUSCAR AMISTAD
+        //AUTOR :JORGE  
+
+        public IActionResult BuscarAmistad()
         {
-            Usuario usuario = new Usuario();
-
-           // //ViewBag.nombres = CargarUsuario("RICAR").First().nombres;
-
-            return View(await Task.Run(() => CargarUsuario("RICAR")));
+            recuperarUsuario();
+            return View();
         }
-        public async Task<IActionResult> Subscripcion()
+
+
+
+
+        //Realizar metodos para LA VSITA CHATEAR CON MATCHS
+        //AUTOR :Richard  
+        public IActionResult Chat()
         {
-            Usuario usuario = new Usuario();
-
-            //ViewBag.nombres = CargarUsuario("RICAR").First().nombres;
-
-            return View(await Task.Run(() => CargarUsuario("RICAR")));
+            recuperarUsuario();
+            return View();
         }
     }
 }

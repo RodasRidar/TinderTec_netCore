@@ -21,25 +21,21 @@
         <nav class="menuContainer ">
             <ol class="menuDetails">
                 <li>
-                 @Html.ActionLink("Inicio", "Index", "Usuario")
-                </li>
-                
-                <li>
-                 @Html.ActionLink("Perfil", "Perfil", "Usuario")
+                 @Html.ActionLink("Buscar Amistad", "BuscarAmistad", "BuscarAmistad")
                 </li>
                 <li>
-                 @Html.ActionLink("Chats", "Chats", "Usuario")
+                 @Html.ActionLink("Perfil", "MantenerUsuario", "Usuario")
                 </li>
                 <li>
-                  @Html.ActionLink("Me Gustas", "MeGustas", "Usuario")
+                 @Html.ActionLink("Chats", "Chat", "BuscarAmistad")
                 </li>
                 <li>
-                    @Html.ActionLink("Subscripcion", "Subscripcion", "Usuario")
+                  @Html.ActionLink("Me Gustas", "MeGustas", "MeGustas")
+                </li>
+                <li>
+                    @Html.ActionLink("Subscripcion", "Subscripcion", "Subscripcion")
                 </il>
-                <li>
-                    <a class="link" >Configuracion</a>       
-                </il>
-                <li>
+                <li style="margin-top:50px;">
                     <a class="link link-cerrar-sesion" >Cerrar Sesion</a>       
                 </il>
             </ol>
@@ -51,7 +47,7 @@
         </div>
         <header class="header">
             <div class="logoContainer">
-                    <a href="index.html"  class="logo">
+                    <a href="./"  class="logo">
                         <img src="~/css/tindertec_logo1.png" class="logoImg">
                     </a>
             </div>

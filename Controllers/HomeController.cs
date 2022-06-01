@@ -3,7 +3,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AppWeb_TinderTec.Models;
-using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json; //serializar y deserializar en json
 
 namespace AppWeb_TinderTec.Controllers
 {
@@ -15,21 +15,9 @@ namespace AppWeb_TinderTec.Controllers
         public HomeController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
+            cadena = this.Configuration.GetConnectionString("myDbRichardWork");
         }
-       
-        public async Task<IActionResult> Index()
-        {
-            
-          
 
-            ViewBag.nombre = CargarUsuario("1").nombres;
-            ViewBag.edad= CargarUsuario("1").edad;
-            ViewBag.fotoURL = CargarUsuario("1").foto1;
-
-
-            return View(await Task.Run(() => CargarUsuario("1")));
-        }
         Usuario CargarUsuario(string id)
 
         {
@@ -53,5 +41,21 @@ namespace AppWeb_TinderTec.Controllers
             }
 
         }
+
+        public async Task<IActionResult> Index()
+        {
+
+
+                Usuario usu = new Usuario();
+                usu = CargarUsuario("1");
+                HttpContext.Session.SetString("usuario", JsonConvert.SerializeObject(usu));
+
+                ViewBag.nombre = usu.nombres;
+                ViewBag.edad = usu.edad;
+                ViewBag.fotoURL = usu.foto1;
+
+            return View(await Task.Run(() => usu));
+        }
+
     }
 }
