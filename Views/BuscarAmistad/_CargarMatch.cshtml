@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Match>
+
+@foreach (var match in Model) {
+
+<li class="active">
+
+
+     @using (Html.BeginForm("Chat", "BuscarAmistad", FormMethod.Post,new{@class="input-group"})){
+
+
+                 @Html.HiddenFor(modelItem => match.id)
+                 @Html.HiddenFor(modelItem => match.foto1)
+                 @Html.HiddenFor(modelItem => match.nombres)
+                                <button  class="btn d-flex bd-highlight">
+                                    <div class="img_cont">
+                                        <img src="@Html.DisplayFor(modelItem => match.foto1)" class="rounded-circle user_img">
+                                    </div>
+                                    <div class="user_info">
+                                        <span>@Html.DisplayFor(modelItem => match.nombres)</span>
+                                    </div>
+                                </button>
+         
+                    }
+
+
+
+</li>
+
+}
+
+@if (ViewBag.MSJdeleteMatchAndMsj != "")
+{
+ <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+  <strong>@ViewBag.MSJdeleteMatchAndMsj</strong> 
+</div>
+ViewBag.MSJdeleteMatchAndMsj = "";
+}
+
+
+<script>
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+
+</script>

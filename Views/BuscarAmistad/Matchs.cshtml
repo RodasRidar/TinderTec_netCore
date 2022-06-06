@@ -1,0 +1,28 @@
+﻿       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" asp-append-version="true"></script>
+  <script type="text/javascript">
+     $("#btnMatchs").addClass("selected");
+</script>  
+<div class="container-fluid h-100" onload="addcolor()">
+        <div class="row justify-content-center h-100">
+          <div class="col-md-8 col-xl-8 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
+              <div class="card-header">
+                <div class="input-group">
+                  <input type="text" placeholder="Buscar Match..." name="" class="form-control search">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body contacts_body"> <!-- HACER FOR EACH --> 
+                <ui class="contacts">
+                   @Html.Partial("_CargarMatch",(IEnumerable<Match>)ViewBag.lstMatch)
+                </ui>
+              </div>
+              <div class="card-footer"></div>
+            </div>
+          </div>
+
+        </div>
+
+</div>

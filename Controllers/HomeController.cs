@@ -15,24 +15,26 @@ namespace AppWeb_TinderTec.Controllers
         public HomeController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbRichardWork");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
-        Usuario CargarUsuario(string id)
+        Usuario CargarUsuario(int id)
 
         {
             Usuario usu = new Usuario();
             using (SqlConnection cn = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("select top 1 nombres,fecha_naci ,foto1 from tb_usuario where cod_usu =@cod", cn);
+                SqlCommand cmd = new SqlCommand("select top 1 nombres,fecha_naci ,foto1 ,cod_usu from tb_usuario where cod_usu =@cod", cn);
                 cmd.Parameters.AddWithValue("@cod", id);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
+                    
                     usu.nombres = dr.GetString(0);
                     usu.fecha_naci = dr.GetDateTime(1);
                     usu.foto1 = dr.GetString(2);
+                    usu.cod_usu = dr.GetInt32(3);
                 }
 
                 cn.Close();
@@ -47,7 +49,7 @@ namespace AppWeb_TinderTec.Controllers
 
 
                 Usuario usu = new Usuario();
-                usu = CargarUsuario("1");
+                usu = CargarUsuario(1);
                 HttpContext.Session.SetString("usuario", JsonConvert.SerializeObject(usu));
 
                 ViewBag.nombre = usu.nombres;

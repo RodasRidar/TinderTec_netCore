@@ -140,12 +140,15 @@ background-size: 100% auto;
     
 }
 
+.selected {
+    background: linear-gradient(45deg,#fd267a,#ff6036);
+}
 .footer a {
     justify-content: center;
     text-decoration: none;
     display: flex;
     flex-wrap: wrap;
-    padding: 12px;
+    padding-top: 12px;
     color: #000;
 }
 
@@ -166,8 +169,8 @@ margin-top: 15vh;
 
     margin-top: 20px;
     max-width: 170px;
-    border: 1px solid #FF4458;
-    background: linear-gradient(to right, #fc4d6a, #fc655d,#fc3177);  ;
+    border: 1px solid silver;
+   /*background: linear-gradient(to right, #fc4d6a, #fc655d,#fc3177);  */ 
     border-radius: 17px;
     padding: 8px 0px;
     text-align: center;
@@ -176,12 +179,17 @@ margin-top: 15vh;
     
 }
 
-.menuDetails li a {
-    list-style: none;
-    text-decoration:none;
-}
+    .menuDetails li a {
+        list-style: none;
+        text-decoration: none;
+        padding: 11px 28px;
+        color: black;
+        font-weight: 500;
+    }
 
-.link-cerrar-sesion{
+
+
+.link-cerrar-sesion {
     margin-top: 80px;
 }
 

@@ -11,12 +11,13 @@ namespace AppWeb_TinderTec.Controllers
     public class BuscarAmistadController : Controller
     {
         string cadena;
+        int cod_usu;
         private IConfiguration Configuration;
 
         public BuscarAmistadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbRichardWork");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
             //cadena = this.Configuration.GetConnectionString("myDbJorge");
         }
 
@@ -24,7 +25,7 @@ namespace AppWeb_TinderTec.Controllers
         {
             Usuario usu = new Usuario();
             usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("usuario"));
-
+            cod_usu = usu.cod_usu;
             ViewBag.nombre = usu.nombres;
             ViewBag.edad = usu.edad;
             ViewBag.fotoURL = usu.foto1;
@@ -44,10 +45,239 @@ namespace AppWeb_TinderTec.Controllers
 
         //Realizar metodos para LA VSITA CHATEAR CON MATCHS
         //AUTOR :Richard  
-        public IActionResult Chat()
+
+
+        //-------------------------------------------------------------- MATCH
+        public IActionResult Matchs()
         {
             recuperarUsuario();
+
+            ViewBag.lstMatch = lstMatch();
+            string MSJdeleteMatchAndMsj;
+
+           if  ( HttpContext.Session.GetString("MSJdeleteMatchAndMsj") == null || HttpContext.Session.GetString("MSJdeleteMatchAndMsj") =="")
+            {
+               
+                MSJdeleteMatchAndMsj = "";
+            }
+            else
+            {
+                 MSJdeleteMatchAndMsj = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("MSJdeleteMatchAndMsj"));
+            }
+
+            ViewBag.MSJdeleteMatchAndMsj = MSJdeleteMatchAndMsj;
+
+            HttpContext.Session.SetString("MSJdeleteMatchAndMsj", JsonConvert.SerializeObject(""));
             return View();
         }
+
+
+
+        //-------------------------------------------------------------- CHATEAR
+
+
+  
+      
+        [HttpPost]
+        public IActionResult Chat(Match match)
+
+        {
+
+            recuperarUsuario();
+
+
+            HttpContext.Session.SetString("chat", JsonConvert.SerializeObject(match));
+
+            ViewBag.cod_usu_now = cod_usu;
+            ViewBag.foto = match.foto1;
+            ViewBag.nom = match.nombres;
+            ViewBag.id = match.id;
+
+            ViewBag.lstChat = lstChat(match.id);
+
+           return View();
+        }
+
+        public IActionResult Chat()
+
+        {
+
+            recuperarUsuario();
+            Match auxiliar = JsonConvert.DeserializeObject<Match>(HttpContext.Session.GetString("chat"));
+            ViewBag.cod_usu_now = cod_usu;
+            ViewBag.foto = auxiliar.foto1;
+            ViewBag.nom = auxiliar.nombres;
+            ViewBag.lstChat = lstChat(auxiliar.id);
+            ViewBag.id = auxiliar.id;
+
+            return View();
+        }
+
+        //-------------------------------------------------------------- ENVIAR MENSAJE
+
+        [HttpPost]
+        public IActionResult EnviarMensaje(int usu_envia , string mensaje)
+        {
+            
+            ViewBag.mensaje = sendMsj( usu_envia,  mensaje);//usar el mensaje para poner verificacion de entrega del mensajes ✅
+
+
+
+            return RedirectToAction("Chat");
+        }
+
+
+        //-------------------------------------------------------------- VerPerfil
+
+        [HttpPost]
+        public IActionResult VerPerfil(int usu_envia)
+        {
+
+            
+
+
+
+            return RedirectToAction("Matchs");
+        }
+
+
+        //-------------------------------------------------------------- CANCERLAR MATCH
+
+
+        [HttpPost]
+        public IActionResult CancelarMatch(int usu_envia)
+        {
+            string msj = deleteMatchAndMsj(usu_envia);
+            HttpContext.Session.SetString("MSJdeleteMatchAndMsj", JsonConvert.SerializeObject(msj));
+
+            return RedirectToAction("Matchs");
+        }
+
+
+        //-------------------------------------------------------------- METODOS
+        IEnumerable<Match> lstMatch()
+        {
+            //retorna la lista de Usuarios y su credito de cada uno
+            List<Match> lstMatch = new List<Match>();
+            recuperarUsuario();
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("exec USP_LISTAR_MATCH_POR_USUARIO @cod_usu1", cn);
+                cmd.Parameters.AddWithValue("@cod_usu1", cod_usu);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    lstMatch.Add(new Match()
+                    {
+                        id = dr.GetInt32(0),
+                        nombres = dr.GetString(1),
+                        foto1 = dr.GetString(2),
+
+
+                    });
+                }
+            }
+            return lstMatch;
+        }
+
+     
+        IEnumerable<Chat> lstChat(int cod_usu_match)
+        {
+            List<Chat> lstChat = new List<Chat>();
+            recuperarUsuario();
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("USP_LISTAR_CHAT_POR_USUARIO", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cod_usu1", cod_usu);
+                cmd.Parameters.AddWithValue("@cod_usu2", cod_usu_match);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+
+                    lstChat.Add(new Chat()
+                    {
+                        cod_chat = dr.GetInt32(0),
+                        cod_usu1 = dr.GetInt32(1),
+                        cod_usu2 = dr.GetInt32(2),
+                        mensaje = dr.GetString(3),
+                        fecha = dr.GetDateTime(4), 
+                        ft_u1 = dr.GetString(5),
+                        nombres = dr.GetString(6)
+
+                    });
+                }
+            }
+            return lstChat;
+        }
+
+
+        private string sendMsj(int usu_envia, string mensaje)
+        {
+            recuperarUsuario();
+            string msj = " ";
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                cn.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("USP_REGISTRAR_CHAT", cn);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@cod_usu1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu2", usu_envia);
+                    cmd.Parameters.AddWithValue("@mensaje", mensaje);
+                    cmd.ExecuteNonQuery();
+                    msj = "Mensaje enviado";
+                }
+                catch (Exception ex)
+                {
+                    mensaje = ex.Message;
+                }
+
+                finally
+                {
+                    cn.Close();
+                }
+            }
+
+            return msj;
+        }
+
+
+        private string deleteMatchAndMsj(int usu_envia)
+        {
+            recuperarUsuario();
+            string msjConfirmation = " ";
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                cn.Open();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("USP_ELIMINAR_MATCH_POR_USUARIO", cn);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@cod_usu1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu2", usu_envia);
+                    cmd.ExecuteNonQuery();
+                    msjConfirmation = "Match y mensajes eliminados";
+                }
+                catch (Exception ex)
+                {
+                    msjConfirmation = ex.Message;
+                }
+
+                finally
+                {
+                    cn.Close();
+                }
+            }
+
+            return msjConfirmation;
+        }
     }
+
+
 }

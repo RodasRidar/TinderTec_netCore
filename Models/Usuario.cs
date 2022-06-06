@@ -9,7 +9,7 @@ namespace AppWeb_TinderTec.Models
 
         [Required]
         [Display(Name = "Codigo")]
-        public string cod_usu { get; set; }
+        public int cod_usu { get; set; }
 
         [Required]
         [Display(Name = "Nombres")]
