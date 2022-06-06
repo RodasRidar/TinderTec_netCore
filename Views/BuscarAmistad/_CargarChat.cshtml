@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Chat>
+
+
+
+@foreach (var item in Model) {
+
+
+    @if(item.cod_usu1 == @ViewBag.cod_usu_now)
+    {
+
+     <div class="d-flex justify-content-start mb-4">
+        <div class="img_cont_msg">
+            <img src="@Html.DisplayFor(modelItem => item.ft_u1)" class="rounded-circle user_img_msg">
+        </div>
+        <div class="msg_cotainer">
+            @Html.DisplayFor(modelItem => item.mensaje)
+        </div>
+    </div>
+    }
+       @if(item.cod_usu2 == @ViewBag.cod_usu_now)
+    {
+    <div class="d-flex justify-content-end mb-4">
+        <div class="msg_cotainer_send">
+           @Html.DisplayFor(modelItem => item.mensaje)
+        </div> 
+        <div class="img_cont_msg">
+            <img src="@Html.DisplayFor(modelItem => item.ft_u1)" class="rounded-circle user_img_msg">
+
+        </div>
+    </div>
+
+    }
+}
+
+<span id="final"></span>
