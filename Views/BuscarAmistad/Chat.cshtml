@@ -41,6 +41,7 @@
 
             </div>
             <div id ="chat_container" class="card-body msg_card_body">
+                 <h5 style="text-align: center; color: darkgray;">@ViewBag.msjNULL</h5>
                 <!-- HACER FOR EACH DE MENSAJES  -->
 
                 @Html.Partial("_CargarChat",(IEnumerable<Chat>)ViewBag.lstChat)

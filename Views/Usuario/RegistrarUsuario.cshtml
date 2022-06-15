@@ -1,0 +1,166 @@
+﻿@model AppWeb_TinderTec.Models.Usuario
+@{
+Layout = null;
+}
+@{
+ViewData["Title"] = "Tindertec | Registrar";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="~/css/tindertec_logo1.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--Iconscout CSS-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="~/css/style-Registro.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container" style="max-width: 450px;">
+        <form asp-action="RegistrarUsuario" class="forms">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form login">
+                <span class="title">Registro</span>
+
+
+                <div class="input-field">
+                    <input asp-for="nombres" class="form-control cajasTexto" type="text" placeholder="Ingrese sus nombres"
+                        required />
+                    <i class="uil uil-user"></i>
+                    <span asp-validation-for="nombres" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field">
+                    <input asp-for="email" class="form-control cajasTexto" type="email" placeholder="Ingrese su correo" required />
+                    <i class="uil uil-envelope icon"></i>
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div id="emailOK"></div>
+
+
+                <div class="input-field">
+                    <input asp-for="fecha_naci" class="form-control cajasTexto" type="date" placeholder="Ingrese su fecha de nacimiento" required value="none"/>
+                    <i class="uil uil-calendar-alt"></i>
+                    <span asp-validation-for="fecha_naci" class="text-danger"></span>
+                </div>
+
+                <div class="input-field">
+                    <input asp-for="clave" class="password cajasTexto"  type="password" class="password" placeholder="Cree su contraseña" required />
+                    <i class="uil uil-lock icon"></i>
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                    <span asp-validation-for="clave" class="text-danger"></span>
+                </div>
+                
+                <div class="input-field">
+                    <input type="password" class="password cajasTexto" id="clave_validacion" placeholder="Confirme su contraseña" required>
+                    <i class="uil uil-lock-access"></i>
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </div>
+                <div id="msj_clave" style="    color: crimson; font-size: 13px;text-align: end; position: absolute;">
+
+                </div>
+                <div class="input-field button">
+                    <input type="button" id="btn_continuar" value="Continuar" disabled  class="text signup-link"  style="background-color :silver;"/>
+                </div>
+
+                @if (@ViewBag.msjRegistro != null)
+                {
+                <h6 class="alerta" style="margin-top:10px;color: crimson; font-weight: bold;position: absolute;margin-left: 20px;">@ViewBag.msjRegistro</h6>
+                                                <script>
+                                                    window.setTimeout(function () {
+                                                        $(".alerta").fadeTo(500, 0).slideUp(500, function () {
+                                                            $(this).remove();
+                                                        });
+                                                    }, 3500);
+                                                </script>
+                }
+                    
+                    
+
+                <div class="login-signup">
+                    <span class="text">Ya eres miembro?
+                        <a href="../Seguridad/Login" class="text login-link">Inicia sesion</a>
+                    </span>
+                </div>
+            </div>
+
+            <!--2ND-->
+            <div class="form singUp">
+                <span class="title">Completa tu informacion</span>
+
+                <div class="input-field">
+                   
+                    <select asp-for="cod_sede" asp-items="@ViewBag.sedes" class="form-select"  style="padding-left: 30px;"></select>
+                    <i class="uil uil-location-point" style="top: 37%;left: 1%;"></i>
+                    <span asp-validation-for="cod_sede" class="text-danger"></span>
+                </div>
+
+                <div class="input-field">
+                    <select asp-for="cod_carrera" asp-items="@ViewBag.carreras" class="form-select"style="padding-left: 30px;"></select>
+                    <i class="uil uil-books" style="top: 37%;left: 1%;"></i>
+                    <span asp-validation-for="cod_carrera" class="text-danger"></span>
+                </div>
+
+                <div class="input-field">
+                    <select asp-for="cod_genero" asp-items="@ViewBag.genero" class="form-select"style="padding-left: 30px;"></select>
+                    <i class="uil uil-mars" style="top: 37%;left: 1%;"></i>
+                    <span asp-validation-for="cod_genero" class="text-danger"></span>
+                </div>
+                <div class="input-field">
+                    <select asp-for="cod_interes" asp-items="@ViewBag.generoInteres" class="form-select"style="padding-left: 30px;"></select>
+                    <i class="uil uil-venus" style="top: 37%;left: 1%;"></i>
+                    <span asp-validation-for="cod_interes" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field">
+                    <input asp-for="descripcion" class="form-control" type="text" placeholder="Escribe algo sobre ti"
+                        required />
+                    <i class="uil uil-brain"></i>
+                    <span asp-validation-for="descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="input-field">
+                    <input asp-for="foto1" class="form-control" type="text" placeholder="Pon la URL de tu primera foto"
+                        required />
+                    <i class="uil uil-image-plus"></i>
+                    <span asp-validation-for="foto1" class="text-danger"></span>
+                </div>
+
+
+                <div class="input-field button form-row">
+                    <div class="form-group col-md-6">
+                        <input class="buttton informacion-link" type="button" value="Atras" style="width: 64%;">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input class="button" type="submit" value="Crear cuenta" style="width: 103%; margin-top: 0;">
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/js-Registro.js"></script>
+    <!-- Main Container Ends -->
+</body>
+
+</html>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

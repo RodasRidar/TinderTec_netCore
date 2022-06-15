@@ -7,18 +7,17 @@ namespace AppWeb_TinderTec.Models
     public class Usuario
     {
 
-        [Required]
+   
         [Display(Name = "Codigo")]
         public int cod_usu { get; set; }
 
-        [Required]
         [Display(Name = "Nombres")]
         public string nombres { get; set; }
 
         [Display(Name = "Correo")]
         public string email { get; set; }
 
-        [Required]
+   
         [Display(Name = "Contraseña")]
         public string clave { get; set; }
 
@@ -50,6 +49,11 @@ namespace AppWeb_TinderTec.Models
         public string genero { get; set; }
 
         public int cod_suscrip { get; set; }
+
+        public int intentos { get; set; }
+
+        public DateTime fechabloqueo { get; set; }
+
     }
 
 

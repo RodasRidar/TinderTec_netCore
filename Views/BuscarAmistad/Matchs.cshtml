@@ -16,6 +16,7 @@
               </div>
               <div class="card-body contacts_body"> <!-- HACER FOR EACH --> 
                 <ui class="contacts">
+                 <h4 style="margin-top: auto;margin-bottom: auto;text-align: center;"> @ViewBag.msjMatchsNULL</h4>
                    @Html.Partial("_CargarMatch",(IEnumerable<Match>)ViewBag.lstMatch)
                 </ui>
               </div>
