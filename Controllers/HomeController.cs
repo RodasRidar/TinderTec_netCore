@@ -18,39 +18,12 @@ namespace AppWeb_TinderTec.Controllers
             cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
-        Usuario CargarUsuario(int id)
-
-        {
-            Usuario usu = new Usuario();
-            using (SqlConnection cn = new SqlConnection(cadena))
-            {
-                SqlCommand cmd = new SqlCommand("select top 1 nombres,fecha_naci ,foto1 ,cod_usu from tb_usuario where cod_usu =@cod", cn);
-                cmd.Parameters.AddWithValue("@cod", id);
-                cn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    
-                    usu.nombres = dr.GetString(0);
-                    usu.fecha_naci = dr.GetDateTime(1);
-                    usu.foto1 = dr.GetString(2);
-                    usu.cod_usu = dr.GetInt32(3);
-                }
-
-                cn.Close();
-                dr.Close();
-                return usu;
-            }
-
-        }
-
         public async Task<IActionResult> Index()
         {
 
 
                 Usuario usu = new Usuario();
-                usu = CargarUsuario(1);
-                HttpContext.Session.SetString("usuario", JsonConvert.SerializeObject(usu));
+                usu =  JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
 
                 ViewBag.nombre = usu.nombres;
                 ViewBag.edad = usu.edad;

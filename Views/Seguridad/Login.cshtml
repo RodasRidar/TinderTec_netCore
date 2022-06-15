@@ -1,0 +1,90 @@
+﻿@model AppWeb_TinderTec.Models.Usuario
+@{
+Layout = null;
+}
+@{
+ViewData["Title"] = "Tindertec | Logueo";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="~/css/tindertec_logo1.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--Iconscout CSS-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <!--CSS-->
+    <link rel="stylesheet" href="~/css/style-Login.css" asp-append-version="true">
+</head>
+
+<body>
+    <div class="container">
+
+        <!--APARTADO Login-->
+        <div class="form login">
+            <div class="logo_container">
+                <img class="logo" src="~/css/logo_tindertec2.png" style="width: 100%;">
+            </div>
+
+            <span class="title">Iniciar Sesion</span>
+            <form asp-action="Login">
+                <div class="input-field">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" style="position: absolute; z-index: 2; font-size: 11px;"></div>
+                    <input asp-for="email" class="form-control" placeholder="Ingresa tu correo" required />
+                    <i class="uil uil-envelope icon"></i>
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div id="emailOK"></div>
+
+                <div class="input-field">
+                    <input asp-for="clave" type="password" class="password" placeholder="Ingresa tu contraseña"
+                        required />
+                    <span asp-validation-for="clave" class="text-danger"></span>
+                    <i class="uil uil-lock icon"></i>
+                    <i class="uil uil-eye-slash showHidePw"></i>
+                </div>
+
+                <div class="input-field button">
+                    <input type="submit" value="Ingresar">
+                </div>
+            </form>
+
+            <div class="login-signup">
+                <span class="text">No eres miembro?
+                    <a href="../Usuario/RegistrarUsuario" class="text signup-link">Registrate aqui</a>
+                </span>
+                @if (@ViewBag.msjRegistro != null)
+                {
+                    <h6 class='alerta' style="margin-top:22px;color: crimson; font-weight: bold;">@ViewBag.msjRegistro</h6>
+                                                <script>
+                                                    window.setTimeout(function () {
+                                                        $(".alerta").fadeTo(500, 0).slideUp(500, function () {
+                                                            $(this).remove();
+                                                        });
+                                                    }, 2500);
+
+                                                </script>
+                }
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/js-Login.js"></script>
+    <!-- Main Container Ends -->
+</body>
+
+</html>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

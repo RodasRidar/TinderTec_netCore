@@ -17,7 +17,7 @@ body{
     height: 88%;
     /*background-image: url(https://tinder.com/static/build/590275fec8cbbb0de80caa66c8450906.webp);*/
 
-    opacity: 80%;
+   /*opacity: 80%;*/
     filter: blur(2px);
     background: linear-gradient(45deg,#fd267a,#ff6036);
 }

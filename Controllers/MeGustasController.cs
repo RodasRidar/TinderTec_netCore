@@ -12,14 +12,14 @@ namespace AppWeb_TinderTec.Controllers
         public MeGustasController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbHansel");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
 
         private void recuperarUsuario()
         {
             Usuario usu = new Usuario();
-            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("usuario"));
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
 
             ViewBag.nombre = usu.nombres;
             ViewBag.edad = usu.edad;
