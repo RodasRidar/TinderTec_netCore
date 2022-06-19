@@ -1,4 +1,160 @@
-﻿ <script type="text/javascript">
-     $("#btnSubscripcion").addClass("selected");
-</script>  
-<h1>Subscripcion:Eduardo</h1>
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Registro_Planes>
+
+@{
+    ViewData["Title"] = "Subscripcion";
+}
+
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+<link rel="stylesheet" href="~/css/estilosSubscripcion.css" />
+<link rel="stylesheet" href="~/css/estilosTarjeta.css" />
+
+
+
+<body>
+
+<div class="titulo">
+
+    <a class="iconoCarrito" asp-action="Carrito"><i class="fas fa-shopping-cart"></i></a>
+
+    <h1 class="tituloPlan">Planes de Subscripción</h1>
+
+    <span>.</span>
+</div>
+
+<section id ="cart-container" >
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Código Plan</td>
+                    <td>Plan</td>
+                    <td>Costo</td>
+                    <td>Duracion</td>
+                    <td>Cantidad</td>
+                    <td>Sub-Total de dias</td>
+                    <td>Sub-Total de pago</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td><h5>@Html.DisplayFor(modelItem => item.cod_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.nom_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.costo_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.duracion_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.cantidad)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.total_dias)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.monto_pagar)</h5></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+</section>
+
+
+
+<div class="container">
+        
+
+        <div class="card-container">
+            <div class="front">
+                <div class="image">
+                    <img src="~/imagenes/chip.png" alt="">
+                    <img src="~/imagenes/visa.png" alt="">
+                </div>
+                <div class="card-number-box">###############</div>
+                <div class="flexbox">
+                    <div class="box">
+                        <span>PROPIETARIO DE LA TARJETA</span>
+                        <div class="card-holder-name">Nombre completo</div>
+                    </div>
+                    <div class="box">
+                        <span>CADUCIDAD</span>
+                        <div class="expiration">
+                            <span class="exp-month">MM</span>
+                            -
+                            <span class="exp-year">YYYY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="back">
+                <div class="stripe"></div>
+                <div class="box">
+                    <span>cvv</span>
+                    <div class="cvv-box"></div>
+                    <img src="~/imagenes/visa.png" alt="">
+                </div>
+            </div>
+    
+        </div>
+        <form action="Subscripcion/Subscripcion/" method="post">
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>Medio de Pago</span>
+                    <select name="cod_medio_pago" id="cod_medio_pago" class="tarjet-input">
+                        <option value="01">Débito</option>
+                        <option value="02">Crédito</option>
+                    </select>
+                </div>
+            </div>
+            <div class="numeroPropietarioTarj">
+
+            
+            <!--Numero de tarjeta-->
+            <div class="inputBox input1">
+                <span>Numero de tarjeta</span>
+                <input type="text" maxlength="16" class="card-number-input" required>
+            </div>
+            <!--Dueño de tarjeta-->
+            <div class="inputBox input2">
+                <span>Propietario de tarjeta</span>
+                <input type="text" class="card-holder-input" required>
+            </div>
+            </div>
+
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>Caducidad(Mes)</span>
+                    <select name="" id="" class="month-input" required>
+                        <option value="01">Enero</option>
+                        <option value="02">Febrero</option>
+                        <option value="03">Marzo</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Mayo</option>
+                        <option value="06">Junio</option>
+                        <option value="07">Julio</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <span>Caducidad(Año)</span>
+                    <select name="" id="" class="year-input" required>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <span>CVV</span>
+                    <input type="text" maxlength="3" class="cvv-input" required>
+                </div>
+            </div>
+            <input type="submit" value="Registrar Pago" class="submit-btn">
+        </form>
+</div>
+<script src=~/js/tarjeta.js></script>
+</body>
+
+        

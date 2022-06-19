@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Registro_Planes>
+
+@{
+    ViewData["Title"] = "Carrito de Subscripciones";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+<link rel="stylesheet" href="~/css/estilosCarrito.css" />
+
+<h1 class="tituloCarrito">Carrito de Subscripciones</h1>
+
+
+<section id ="cart-container" class="container my-5">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Código Plan</td>
+                    <td>Plan</td>
+                    <td>Nombre Plan</td>
+                    <td>Costo</td>
+                    <td>Duracion</td>
+                    <td>Cantidad</td>
+                    <td>Total dias</td>
+                    <td>Monto Pagar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.ActionLink("X", "Delete", new { id=item.cod_plan}, new { @class = "equis"})<i class="fas fa-trash-alt"></i></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.cod_plan)</h5></td>
+                    <td><img src="@Url.Content($"~/imagenes/{item.cod_plan}.png")"/></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.nom_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.costo_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.duracion_plan)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.cantidad)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.total_dias)</h5></td>
+                    <td><h5>@Html.DisplayFor(modelItem => item.monto_pagar)</h5></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+</section>
+
+
+<section id="cart-bottom" class="container">
+        <div class="row">
+            
+            <div class="total co-lg-6 col-md-6 col-12 mb-4">
+                <div>
+                    <h5>TOTAL CARRITO</h5>
+                    <div class="d-flex justify-content-between">
+                        <h6>Total a Pagar</h6>
+                        <p>@Model.Sum(x=>x.monto_pagar)</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6>Total de dias de Subscripcion</h6>
+                        <p>@Model.Sum(x=>x.total_dias) </p>
+                    </div>
+                    <div class="botonesCompra">
+                    <a asp-action="Subscripcion" class="btn btn-warning btn-compra">Registrar Compra</a>
+                    <a asp-action="Planes" class="btn btn-warning btn-compra">Retornar a los Planes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

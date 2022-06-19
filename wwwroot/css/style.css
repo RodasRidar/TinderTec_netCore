@@ -48,14 +48,12 @@ body{
     overflow-y: scroll;
 }
 .app{
-
     position: absolute;
     Z-INDEX: 1;
     height: 60vh;
-    width: 60vw;
-    border: 1px solid black;
-    margin-top: 21vh;
-    margin-left: 10vw;
+    width: 70vw;
+    margin-top: 15vh;
+    margin-left: 5vw;
 }
 .match{
     display: flex;
