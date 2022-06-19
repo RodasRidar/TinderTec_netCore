@@ -115,14 +115,15 @@ namespace AppWeb_TinderTec.Controllers
                         usu.fecha_naci = dr.GetDateTime(1);
                         usu.foto1 = dr.GetString(2);
                         usu.cod_usu = dr.GetInt32(3);
-                    }
+                        usu.email = dr.GetString(4);
+                }
 
                     cn.Close();
                     dr.Close();
                     return usu;
                 }
 
-            }
+        }
 
 
     }

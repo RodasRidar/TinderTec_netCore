@@ -1,0 +1,45 @@
+﻿@model AppWeb_TinderTec.Models.Usuario
+
+
+        <form asp-action="Mantener" id="contact-form" method="post" autocomplete="off">
+            <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-4" style="margin-bottom: 0.5rem!important;">
+                <label asp-for="nombres" class="textBoxTitle">Nombre Público</label>
+                <input asp-for="nombres" type="text" placeholder="Ingrese Nombre">
+                <span asp-validation-for="nombres" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4" style="margin-bottom: 0.5rem!important;">
+                <label asp-for="descripcion" class="textBoxTitle">Descripcion</label>
+                <input asp-for="descripcion"  type="text" placeholder="Ingrese una descripción" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-4" style="margin-bottom: 0.5rem!important;">
+                <label asp-for="cod_carrera" class="textBoxTitle">Carrera</label>
+                <select asp-for="cod_carrera" asp-items="@ViewBag.carrera" class="form-select" style="padding-left: 30px;"></select>
+                <span asp-validation-for="cod_carrera" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4" style="margin-bottom: 0.5rem!important;">
+                <label asp-for="cod_sede" class="textBoxTitle">Sede de Cibertec</label>
+                <select asp-for="cod_sede" asp-items="@ViewBag.sede" class="form-select" style="padding-left: 30px;"></select>
+                <span asp-validation-for="cod_sede" class="text-danger"></span>
+            </div>
+
+
+            <div class="mb-4" style="margin-bottom: 0.5rem!important;">
+                <label asp-for="cod_interes" class="textBoxTitle">Interés de Género</label>
+                <select asp-for="cod_interes" asp-items="@ViewBag.interes" class="form-select"  style="padding-left: 30px;"></select>
+                <span asp-validation-for="cod_interes" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Guardar Cambios">
+            </div>
+        </form>
+ 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
