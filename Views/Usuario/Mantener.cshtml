@@ -1,0 +1,311 @@
+﻿    @{
+    Layout = null;
+    }
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="Tindertec" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tindertec | Perfil</title>
+        <link rel="icon" type="image/png" href="~/css/tindertec_logo1.png">
+        <link rel="stylesheet" href="~/css/style-MantenerUsuario.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"asp-append-version="true">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" asp-append-version="true">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" asp-append-version="true">
+        <link rel="stylesgeet" href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css" asp-append-version="true">
+        <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" asp-append-version="true" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" asp-append-version="true">
+        <script type="text/javascript"src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" asp-append-version="true">
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" asp-append-version="true"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" asp-append-version="true"></script>
+
+</head>
+
+    <body id="body">
+        <div class="modal fade" id="addFotoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="AgregarFoto" method="post" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="margin: auto;">Ingrese URL de su foto:</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="url_foto" placeholder="https://www..." required="required">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Añadir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="lblDeleteModal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form class="modal-content" action="Eliminar" method="post">
+                    <div class="modal-header">
+                        <h5 class="title" id="lblDeleteModal" style="margin-left: auto;margin-right: auto;">¿Esta seguro de
+                            eliminar su cuenta?</h5>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center !important;">
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="container-noBT">
+            <div class="first-partition">
+
+                <div class="content-profile" style="background-image: url(@ViewBag.fotoURL);">
+                </div>
+                <span class="nombre-profile">
+                    <h2>@ViewBag.nombre,@ViewBag.edad</h2>
+                </span>
+                <nav class="menuContainer ">
+                    <ol class="menuDetails">
+
+                        <li id="btnBuscarAmistad">
+                            @Html.ActionLink("Buscar Amistad", "BuscarAmistad", "BuscarAmistad" )
+                        </li>
+                        <li id="btnMantenerUsuario">
+                            @Html.ActionLink("Ver mi Perfil", "Mantener", "Usuario")
+                        </li>
+                        <li id="btnMatchs">
+                            @Html.ActionLink("Matchs y Chats", "Matchs", "BuscarAmistad")
+                        </li>
+                        <li id="btnMeGustas">
+                            @Html.ActionLink("Mis me Gustas", "MeGustas", "MeGustas")
+                        </li>
+                        <li id="btnSubscripcion">
+                            @Html.ActionLink("Subscripcion", "Subscripcion", "Subscripcion")
+                            </il>
+                        <li id="btnCerrarSesion" style="margin-top:50px;">
+                            @Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Seguridad")
+                            </il>
+                    </ol>
+                </nav>
+            </div>
+            <div class="second-partition">
+                <div class="app"style="overflow: auto;  position: absolute;Z-INDEX: 1;height: 74vh;width: 60vw;border: 1px solid black;margin-top: 14vh; margin-left: 10vw;">
+                    <div class="profile-page">
+                        <div class="main main-raised">
+                            <div class="profile-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- MENU-->
+                                        <div class="col-md-6 ml-auto mr-auto">
+                                            <div class="profile-tabs">
+                                                <ul class="nav nav-pills nav-pills-icons justify-content-center"
+                                                    role="tablist">
+                                                    <li class="nav-item clgaleria">
+                                                        <a class="nav-link active " id="galeria"  role="tab"
+                                                            data-toggle="tab">
+                                                            <i class="material-icons">camera</i>
+                                                            Galeria
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item clmantenimiento">
+                                                        <a class="nav-link "  role="tab" id="editar"
+                                                            data-toggle="tab">
+                                                            <i class="material-icons">palette</i>
+                                                            Editar Perfil
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item cleliminar">
+                                                        <a class="nav-link " role="tab" id="eliminar"
+                                                            data-toggle="tab">
+                                                            <i class="material-icons">no_accounts</i>
+                                                            Eliminar cuenta
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            @if(@ViewBag.msjConfirmacionAddFoto != null ){
+                                            <div class="alerta" style="text-align: center;margin-top: 2vh;">
+                                                <h4 style="color: crimson;">@ViewBag.msjConfirmacionAddFoto </h4>
+                                                <script>
+                                                    window.setTimeout(function () {
+                                                        $(".alerta").fadeTo(500, 0).slideUp(500, function () {
+                                                            $(this).remove();
+                                                        });
+                                                    }, 2500);
+
+                                                </script>
+                                            </div>
+                                            }
+                                    <div class="tab-content tab-space">
+
+                                        <!-- galeria-->
+                                        <div class="tab-pane active text-center gallery" id="studio">
+                                            @Html.Partial("_Galeria",(IEnumerable<Usuario>)ViewBag.lstfotos)
+                                        </div>
+                                        <div class="tab-pane" id="palette" style="display: none">
+                                            <!-- Mantener datos-->
+                                            <div class="row">
+                                                <div class="container py-4">
+                                                    <div class="row">
+                                                        <div
+                                                            class="col-lg-6 mx-auto d-flex justify-content-center flex-column">
+
+                                                            @if (@ViewBag.msjConfirmacionEditarPerfil != null)
+                                                            {
+                                                            <div class="alerta" style="text-align: center;">
+                                                                <h4 style="color: crimson;"> @ViewBag.msjConfirmacionEditarPerfil</h4>
+                                                                <script>
+                                                                    window.setTimeout(function () {
+                                                                        $(".alerta").fadeTo(500, 0).slideUp(500, function () {
+                                                                            $(this).remove();
+                                                                        });
+                                                                    }, 1500);
+
+                                                                </script>
+                                                            </div>
+                                                            }
+
+                                                            @Html.Partial("_EditarPerfil",(Usuario)ViewBag.Usuario_mantener)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="delete" style="display: none">
+                                            <!-- Eliminar cuenta-->
+                                            <div class="row">
+                                                <div class="container py-4">
+                                                    <div class="row">
+                                                        <div
+                                                            class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
+
+                                                            <h3 class="title text-center">T&C de cierre definitivo de
+                                                                cuenta
+                                                            </h3>
+
+                                                            <div role="form" id="cerrar-cuenta">
+                                                                <div class="card-body">
+
+                                                                    <p>Si quieres eliminar tu cuenta de TinderTec
+                                                                        definitivamente, debes saber que tu cuenta,
+                                                                        todos
+                                                                        tus datos personales, likes, dislikes y mensajes
+                                                                        de
+                                                                        texto serán eliminados de forma
+                                                                        automática,
+                                                                        para siempre. Debes estar de acuerdo con las
+                                                                        siguientes condiciones.<br><br>
+                                                                        Después de eliminar tu cuenta:<br><br>
+                                                                        - Se cerrará tu sesión automáticamente en todos
+                                                                        los
+                                                                        dispositivos.<br>
+                                                                        - Se eliminarán todos tus mensajes de texto.<br>
+                                                                        - No podrás tener acceso a tus contactos en
+                                                                        TinderTec.<br>
+                                                                        - Ya no podrás iniciar sesión en los servicios
+                                                                        de
+                                                                        TinderTec, para eso deberás crear una
+                                                                        cuenta
+                                                                        nueva.<br>
+
+                                                                    </p>
+                                                                    <button id="btnDelete " type="button" class="button"
+                                                                        data-toggle="modal" data-target="#deleteModal"
+                                                                        style="margin-left: 24%;width: 55%;background-color: #fc4c6c;color: white;padding: 14px 20px;margin-top: 24px;margin-bottom: 8px;border: none;border-radius: 4px;cursor: pointer;font-family:Roboto Slab;">
+                                                                        Eliminar mi cuenta
+                                                                    </button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <header class="header">
+                    <div class="logoContainer">
+                        <a href="./" class="logo">
+                            <img src="~/css/tindertec_logo1.png" class="logoImg">
+                        </a>
+                    </div>
+                </header>
+
+                <div class="container-tindertec">
+                </div>
+
+                <footer class="footer">
+                    <a href="./">Tindertec © 2022 Todos los derechos reservados.</a>
+                </footer>
+
+            </div>
+        </div>
+        @if(@ViewBag.msjConfirmacionEditarPerfil != null){
+                                            <script>
+                                    		    document.getElementById("studio").setAttribute("style", "display: none;")
+                                                document.getElementById("palette").setAttribute("style", "display: block;")
+                                                document.getElementById("delete").setAttribute("style", "display: none;")
+                                            
+                                                document.getElementById("galeria").classList.remove('active');
+                                                document.getElementById("editar").classList.add('active');
+                                                document.getElementById("eliminar").classList.remove('active');
+                                            
+                                            </script>
+        }
+
+
+
+       
+        <script type="text/javascript" src="~/js/index.js" asp-append-version="true"></script>
+
+        <script>
+
+            $(document).ready(function () {
+                $("#btnBuscarAmistad").click(function () {
+                    $("#btnBuscarAmistad").addClass("selected");
+                });
+                $("#btnMantenerUsuario").click(function () {
+                    $("#btnMantenerUsuario").addClass("selected");
+                });
+                $("#btnMatchs").click(function () {
+                    $("#btnMatchs").addClass("selected");
+                });
+                $("#btnMeGustas").click(function () {
+                    $("#btnMeGustas").addClass("selected");
+                });
+                $("#btnSubscripcion").click(function () {
+                    $("#btnSubscripcion").addClass("selected");
+                });
+                $("#btnCerrarSesion").click(function () {
+                    $("#btnCerrarSesion").addClass("selected");
+                });
+
+            });
+
+            $("#btnMantenerUsuario").addClass("selected");
+
+        </script>
+    </body>
+
+</html>
+

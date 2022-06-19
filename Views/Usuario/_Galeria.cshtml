@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Usuario>
+
+
+@foreach (var item in Model) {
+
+    @if(ViewBag.nroFotos==5){
+
+               <div class="row" >
+                   <div class="col-md-3 ml-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto1)" class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto3)"  class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto5)"  class="rounded">
+                   </div>
+                   <div class="col-md-3 mr-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto2)"  class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto4)"  class="rounded">
+                   </div>
+               </div>
+
+    }
+        @if(ViewBag.nroFotos==4){
+
+               <div class="row">
+                   <div class="col-md-3 ml-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto1)" class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto3)"  class="rounded">
+                        <button data-toggle="modal" data-target="#addFotoModal" type="button">
+                          <img src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png" class="rounded"style="padding-top: 6vh;padding-bottom: 4vh;">
+                        </button>
+                   </div>
+                   <div class="col-md-3 mr-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto2)"  class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto4)"  class="rounded"> 
+                   </div>
+               </div>
+
+    }
+        @if(ViewBag.nroFotos==3){
+
+               <div class="row" >
+                   <div class="col-md-3 ml-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto1)" class="rounded">
+                       <img src="@Html.DisplayFor(modelItem => item.foto3)"  class="rounded">
+
+                   </div>
+                   <div class="col-md-3 mr-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto2)"  class="rounded">
+                        <button data-toggle="modal" data-target="#addFotoModal" type="button">
+                          <img src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png" class="rounded"style="padding-top: 6vh;padding-bottom: 4vh;">
+                        </button>
+                   </div>
+               </div>
+
+    }
+        @if(ViewBag.nroFotos==2){
+
+               <div class="row" >
+                   <div class="col-md-3 ml-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto1)" class="rounded">
+                        <button data-toggle="modal" data-target="#addFotoModal" type="button">
+                          <img src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png" class="rounded"style="padding-top: 6vh;padding-bottom: 4vh;">
+                        </button>
+                   </div>
+                   <div class="col-md-3 mr-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto2)"  class="rounded">
+                   </div>
+               </div>
+
+    }
+        @if(ViewBag.nroFotos==1){
+               <div class="row">
+                   <div class="col-md-3 ml-auto" style="max-width: 40%">
+                       <img src="@Html.DisplayFor(modelItem => item.foto1)" class="rounded">
+ 
+                   </div>
+                   <div class="col-md-3 mr-auto" style="max-width: 40%">
+                         <button data-toggle="modal" data-target="#addFotoModal" type="button">
+                          <img src="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_960_720.png" class="rounded"style="padding-top: 6vh;padding-bottom: 4vh;">
+                        </button>
+                   </div>
+               </div>
+
+    }
+}
+       

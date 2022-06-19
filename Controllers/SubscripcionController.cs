@@ -11,6 +11,7 @@ namespace AppWeb_TinderTec.Controllers
     public class SubscripcionController : Controller
     {
         string cadena;
+
         private IConfiguration Configuration;
 
         public SubscripcionController(IConfiguration _configuration)
@@ -23,7 +24,7 @@ namespace AppWeb_TinderTec.Controllers
         {
            Usuario usu = new Usuario();
            usu= JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
-
+          
             ViewBag.nombre = usu.nombres;
             ViewBag.edad = usu.edad;
             ViewBag.fotoURL = usu.foto1;
