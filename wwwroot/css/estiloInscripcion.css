@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+.imgLogoInscripcion {
+    width: 100%;
+    height: 200px;
+    max-width: 100%;
+}
+
+.card__title {
+    margin-bottom: .3em;
+    text-align: center;
+    font-size: 2.25rem;
+}
+
+.card__subtitle {
+    margin-bottom: .3em;
+    text-align: center;
+    font-size: 1.55rem;
+}
+
+hr {
+    margin-bottom: 1.5em;
+}
+
+.container__inscripcion {
+    height: 480px;
+    display: flex;
+    margin: 5em auto;
+    width: 50%;
+}
+
+.card__left {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #fc4d6a, #fc655d, #fc3177);
+    padding: .5rem 0;
+}
+
+.card__right {
+    width: 80%;
+    padding: 0 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+.form2{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+.form2__part1{
+    display: flex;
+    flex-direction: row;
+}
+.form2__part2{
+    display: flex;
+    flex-direction: row;
+    gap: .85em;
+    margin-top: 1em;
+}
+.btn{
+    background: #fc3177;
+    border: none;
+}
+
+.btn:hover {
+    background: #fc3177;
+}
+.btn:focus {
+    background: #fc3177 !important;
+    font-weight: 800;
+}
+em{
+    margin-right: 30px;
+}

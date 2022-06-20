@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AppWeb_TinderTec.Models.Concepto_Planes>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+<link rel="stylesheet" href="~/css/estilosPlanesSubcripcion.css" />
+<script type="text/javascript">
+     $("#btnSubscripcion").addClass("selected");
+</script>  
+
+ <div class="titulo">
+    <span>.</span>
+    <h1 class="tituloPlan">Planes de Subscripción</h1>
+
+    <a class="iconoCarrito" asp-action="Carrito"><i class="fas fa-shopping-cart"></i></a>
+
+ </div>
+
+ <div class="subtitulo">
+    <p>Actualmente te encuentras en el plan <b>@ViewBag.plan_actual</b></p>
+ </div>
+
+ 
+<div class="containerPlanes">
+    @foreach (var item in Model) {
+        <div class="cardPlan">
+            <img src="@Url.Content($"~/imagenes/{item.cod_plan}.png")" />
+            
+            <h4>@Html.DisplayFor(modelItem => item.nom_plan)</h4>
+            
+            <p>Codigo: @Html.DisplayFor(modelItem => item.cod_plan) </p>
+
+            <p>Descripcion: @Html.DisplayFor(modelItem => item.desc_plan) </p>
+            
+            <p>Precio: @Html.DisplayFor(modelItem => item.costo_plan) </p>
+            
+            <p>Duracion en dias: @Html.DisplayFor(modelItem => item.duracion_plan) </p>
+            
+             @Html.ActionLink("Elegir Plan","Agregar",new{id=item.cod_plan})
+        </div>            
+}
+</div>
+
+
+
+
+
+
+
+

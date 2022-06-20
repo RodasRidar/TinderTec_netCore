@@ -1,0 +1,80 @@
+﻿@model AppWeb_TinderTec.Models.Concepto_Planes
+
+<script type="text/javascript">
+     $("#btnSubscripcion").addClass("selected");
+</script>  
+
+<link rel="stylesheet" href="~/css/estiloInscripcion.css" />
+
+
+
+    <div class="container__inscripcion">
+
+        <div class="card__left">
+            <img src="@Url.Content($"~/imagenes/{@Model.cod_plan}.png")" class="imgLogoInscripcion" />
+        </div>
+
+
+        <div class="card__right">
+            <h1 class="card__title">Inscripcion</h1>
+            <h2 class="card__subtitle">Plan: @Html.DisplayFor(model => model.nom_plan)</h2>
+            <hr />
+
+            <dl class="form">
+                <dt class="">
+                    <p>Codigo: @Html.DisplayFor(model => model.cod_plan)</p>
+                </dt>
+                <dt class="">
+                    <p>Nombre: @Html.DisplayFor(model => model.nom_plan)</p>
+                </dt>
+                <dt class="">
+                    <p>Descripcion: @Html.DisplayFor(model => model.desc_plan)</p>
+                </dt>
+                <dt class="">
+                    <p>Costo: @Html.DisplayFor(model => model.costo_plan) </p>
+                </dt>
+                <dt class="">
+                    <p>Duración en días: @Html.DisplayFor(model => model.duracion_plan) </p>
+                </dt>
+            </dl>
+
+            <!--Formulario para enviar datos al Post Agregar-->
+            <div class="form2">
+                <form asp-action="Agregar" method="post">
+                    <div class="form2__part1">
+                        @Html.Hidden("codigo",Model.cod_plan)
+                        <em>Ingrese la cantidad</em>
+                        @Html.TextBox("cantidad",0,new{type="number",min=1, max= 4}) 
+                    </div>
+                    <div class="form2__part2">
+                        <input type="submit" value="Agregar" class="btn btn-primary" />
+                        <a asp-action="Planes" class="btn btn-primary">Retornar a los Planes</a>
+                    </div>
+                    <div>
+                        @ViewBag.mensaje
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,7 +17,7 @@ namespace AppWeb_TinderTec.Controllers
         public BuscarAmistadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
             //cadena = this.Configuration.GetConnectionString("myDbJorge");
             //cadena = this.Configuration.GetConnectionString("myDbRichardWork");
         }

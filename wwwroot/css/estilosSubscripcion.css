@@ -1,0 +1,72 @@
+
+.tituloPlan {
+    text-align: center;
+
+}
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: -50px;
+}
+
+.titulo span {
+    font-size: .1px;
+}
+
+
+.iconoCarrito {
+    font-size: 2.25rem;
+    color: black;
+}
+
+
+/*Subscripcion*/
+#cart-container{
+    overflow-x: auto;
+}
+
+#cart-container table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+#cart-container table thead {
+    font-weight: 700;
+}
+
+#cart-container table thead td {
+    background-color: trasnparent;
+    color: #fff;
+    border: none;
+    padding: 6px 0;
+}
+
+#cart-container table td{
+    border: 1px solid #b6b3b3;
+    text-align: center;
+    padding: 1px 0;
+}
+
+#cart-container table td:nth-child(1){
+    width: 85px;
+}
+
+#cart-container table td:nth-child(2)
+{
+    width: 190px;
+}
+#cart-container table td:nth-child(3),
+#cart-container table td:nth-child(4),
+#cart-container table td:nth-child(5)
+{
+    width: 85px;
+}
+
+#cart-container table td:nth-child(6),
+#cart-container table td:nth-child(7) {
+    width: 145px;
+}

@@ -15,7 +15,7 @@ namespace AppWeb_TinderTec.Controllers
         public SeguridadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
         }
 
 

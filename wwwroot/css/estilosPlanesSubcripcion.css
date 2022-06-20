@@ -1,0 +1,102 @@
+.tituloPlan{
+    text-align: center;
+}
+
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titulo span {
+    font-size: .1px;
+}
+
+.subtitulo {
+    letter-spacing: 15px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+.iconoCarrito {
+    font-size: 2.25rem;
+    color: black;
+}
+
+
+
+body{
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+}
+
+.title{
+    text-align: center;
+    font-size: 40px;
+    margin-top: 100px;
+    font-weight: 100;
+}
+
+.containerPlanes{
+    width: 100%;
+    max-width: 1200px;
+    height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    overflow-y:auto;
+
+}
+
+.cardPlan{
+    width: 250px;
+    height: 430px;
+    margin-top:auto;
+    margin-bottom:auto;
+    background-color: #F0F2F4;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    transition: all 0.25s;
+}
+
+.containerPlanes .cardPlan:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.containerPlanes .cardPlan img{
+    width: 250px;
+    height: 130px;
+}
+
+.containerPlanes .cardPlan h4{
+    font-weight: 600;
+}
+
+.containerPlanes .cardPlan p{
+    padding: 0 1rem;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.containerPlanes .cardPlan a{
+    font-weight: 500;
+    text-decoration: none;
+    color: #3498db;
+}
