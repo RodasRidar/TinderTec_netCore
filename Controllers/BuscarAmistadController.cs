@@ -17,8 +17,8 @@ namespace AppWeb_TinderTec.Controllers
         public BuscarAmistadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbEduardo");
-            //cadena = this.Configuration.GetConnectionString("myDbJorge");
+            //cadena = this.Configuration.GetConnectionString("myDbEduardo");
+            cadena = this.Configuration.GetConnectionString("myDbJorge");
             //cadena = this.Configuration.GetConnectionString("myDbRichardWork");
         }
 
@@ -35,10 +35,197 @@ namespace AppWeb_TinderTec.Controllers
         //Realizar metodos para LA VSITA BUSCAR AMISTAD
         //AUTOR :JORGE  
 
-        public async Task<IActionResult> BuscarAmistad()
+        //metodo de optener usuario disponible 
+        Usuario UsuarioBuscarAmistad()
+        {
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
+
+            Usuario temporal = new Usuario();
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("USP_USUARIO_LISTAR", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cod_usu", cod_usu);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+
+                    temporal.cod_usu = dr.GetInt32(0);
+                    temporal.nombres = dr.GetString(1);
+                    temporal.foto1 = dr.GetString(4);
+                    temporal.fecha_naci = dr.GetDateTime(9);
+                    temporal.descripcion = dr.GetString(14);
+                    temporal.carrera = dr.GetString(18);
+                    temporal.sede = dr.GetString(19);
+
+
+                }
+                cn.Close();
+            }
+
+            return temporal;
+        }
+
+
+        //metodo para insertar el like
+        string insertarLike(int cod_usuario2)
+        {
+            string mensaje = "";
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
+
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                cn.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("USP_INSERTAR_LIKE", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 300).Direction = ParameterDirection.Output;
+                    cmd.Parameters.AddWithValue("@cod_usu_1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu_2", cod_usuario2);
+                    cmd.ExecuteNonQuery();
+
+                    string match = cmd.Parameters["@mensaje"].Value.ToString();
+                    if (match == "MATCH")
+                    {
+                        mensaje = match;
+                    }
+                    
+
+
+                }
+                catch (Exception e)
+                {
+                    mensaje = e.Message;//capturo el mensaje de error
+                    cn.Close();
+                }
+
+
+            }
+            return mensaje;
+        }
+
+
+        //metodo para inserta el dislike
+        string insertarDisLike(int cod_usu_2)
+        {
+            string mensaje = "";
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
+
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                cn.Open();
+                try
+                {
+
+                    SqlCommand cmd = new SqlCommand("USP_INSERTAR_DISLIKE", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@cod_usu_1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu_2", cod_usu_2);
+                    cmd.ExecuteNonQuery();
+
+
+                    mensaje = "DISLIKE";
+                   
+
+                }
+                catch (Exception e)
+                {
+                    mensaje = e.Message;
+                    cn.Close();
+                }
+
+
+            }
+            return mensaje;
+        }
+
+
+        public IActionResult BuscarAmistad(Usuario usu)
         {
             recuperarUsuario();
-            return View();
+            if (usu.cod_usu == 0)
+            {
+
+                ViewBag.msjBuscarAmistadNull = "¡Nada que mostrar ,amplia tus preferencias para una mejor experiencia!";
+                ViewBag.idValidacion = UsuarioBuscarAmistad().cod_usu;
+                return View(UsuarioBuscarAmistad());
+
+            }
+
+            else
+            {
+                return View(usu);
+            }
+
+        }
+
+        //buscar por codigo
+        Usuario Buscar(int cod_usua)
+        {
+            Usuario temporal = new Usuario();
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("USP_USUARIO_BUSCAR_ID", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@cod_usu", cod_usua);
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+
+                    temporal.cod_usu = dr.GetInt32(0);
+                    temporal.nombres = dr.GetString(1);
+                    temporal.foto1 = dr.GetString(4);
+                    temporal.fecha_naci = dr.GetDateTime(9);
+                    temporal.descripcion = dr.GetString(14);
+                    temporal.carrera = dr.GetString(18);
+                    temporal.sede = dr.GetString(19);
+
+
+                }
+                cn.Close();
+            }
+
+            return temporal;
+        }
+
+        //metodo post like
+
+        [HttpPost]
+        public IActionResult Like(int codUsuarioliked)
+        {
+            string mensaje = insertarLike(codUsuarioliked);
+            recuperarUsuario();
+
+            ViewBag.mensajeLike = mensaje;
+
+            if (mensaje != null)
+            {
+                return RedirectToAction("BuscarAmistad", Buscar(codUsuarioliked));
+            }
+
+
+            return RedirectToAction("BuscarAmistad", UsuarioBuscarAmistad());
+
+        }
+
+        // metodo post dislike
+
+        [HttpPost]
+        public IActionResult dislike(int codUsuarioDisliked)
+        {
+            insertarDisLike(codUsuarioDisliked);
+            recuperarUsuario();
+
+
+            return RedirectToAction("BuscarAmistad", UsuarioBuscarAmistad());
+
         }
 
 

@@ -1,4 +1,82 @@
-﻿  <script type="text/javascript">
+﻿ @model AppWeb_TinderTec.Models.Usuario
+ <script type="text/javascript">
      $("#btnBuscarAmistad").addClass("selected");
 </script>  
-<H1>Buscar Amistad:jorge</H1>
+
+@if (ViewBag.mensajeLike != null)
+{
+    <!--
+    <div class="modal"  tabindex="index 100" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    encabezado
+                </div>
+                <div class="modal-body">
+                    <div class="cuerpo">
+                        <h1 class="animacion">Match</h1>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    pie
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <div class="cuerpo">
+           <h2 class="animacion">Match</h2>
+           @Html.ActionLink("Buscar Amistad", "BuscarAmistad", "BuscarAmistad" )
+        </div>
+}
+
+@if ( ViewBag.idValidacion == 0)
+{
+    <div class="container">
+        <div class="content">
+            <div class="card">
+                <div class="user" style=" margin-top: 158px;text-align: center;">
+                        <h4>@ViewBag.msjBuscarAmistadNull</h4>
+                </div>
+           </div>
+        </div>
+     </div>
+
+}
+else
+{   
+     
+        <div class="container">
+        <div class="content">
+           
+            <div class="card">
+                <div class="user">
+                    <img class="imagen" src="@Html.DisplayFor(model => model.foto1)" alt=""/>
+                    <div class="profile">
+                        <div class="name"> @Html.DisplayFor(model => model.nombres) ,<span>@Html.DisplayFor(model => model.edad)</span></div>
+                        <div class="local">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>a 20 quilometros de aqui</span>
+                        </div>
+                        <div class="carrera"> @Html.DisplayFor(model => model.carrera)</div>
+                        <div class="sede">@Html.DisplayFor(model => model.sede)</div>
+                        <div class="descripcion">@Html.DisplayFor(model => model.descripcion)<a href=""><span>ver mas</span></a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                    
+                @using (Html.BeginForm("like", "BuscarAmistad", FormMethod.Post)){
+ 
+                                @Html.Hidden("codUsuarioliked",Model.cod_usu)
+                                <button class="heart" style=" border:none;" ><i class="fas fa-heart"> </i> </button> }
+                 @using (Html.BeginForm("dislike", "BuscarAmistad", FormMethod.Post)){
+ 
+                                @Html.Hidden("codUsuarioDisliked",Model.cod_usu)
+                                <button class="no" style=" border:none;"><i class="fas fa-times"></i></button> }
+                 
+            </div>
+        </div>
+    </div>
+}
