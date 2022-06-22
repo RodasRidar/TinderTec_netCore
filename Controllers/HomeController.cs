@@ -15,7 +15,7 @@ namespace AppWeb_TinderTec.Controllers
         public HomeController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbJorge");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
         }
 
         public async Task<IActionResult> Index()

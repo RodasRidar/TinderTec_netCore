@@ -19,7 +19,7 @@ namespace AppWeb_TinderTec.Controllers
         {
             Configuration = _configuration;
            // cadena = this.Configuration.GetConnectionString("myDbPierina");
-            cadena = this.Configuration.GetConnectionString("myDbJorge");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
         }
 
         private void recuperarUsuario()

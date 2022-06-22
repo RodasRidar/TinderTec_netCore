@@ -17,8 +17,8 @@ namespace AppWeb_TinderTec.Controllers
         public BuscarAmistadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            //cadena = this.Configuration.GetConnectionString("myDbEduardo");
-            cadena = this.Configuration.GetConnectionString("myDbJorge");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
+            //cadena = this.Configuration.GetConnectionString("myDbJorge");
             //cadena = this.Configuration.GetConnectionString("myDbRichardWork");
         }
 
@@ -46,7 +46,7 @@ namespace AppWeb_TinderTec.Controllers
             {
                 SqlCommand cmd = new SqlCommand("USP_USUARIO_LISTAR", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@cod_usu", cod_usu);
+                cmd.Parameters.AddWithValue("@cod_usu", usu.cod_usu);
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -72,6 +72,7 @@ namespace AppWeb_TinderTec.Controllers
         //metodo para insertar el like
         string insertarLike(int cod_usuario2)
         {
+   
             string mensaje = "";
             Usuario usu = new Usuario();
             usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
@@ -85,7 +86,7 @@ namespace AppWeb_TinderTec.Controllers
                     SqlCommand cmd = new SqlCommand("USP_INSERTAR_LIKE", cn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 300).Direction = ParameterDirection.Output;
-                    cmd.Parameters.AddWithValue("@cod_usu_1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu_1", usu.cod_usu);
                     cmd.Parameters.AddWithValue("@cod_usu_2", cod_usuario2);
                     cmd.ExecuteNonQuery();
 
@@ -125,7 +126,7 @@ namespace AppWeb_TinderTec.Controllers
 
                     SqlCommand cmd = new SqlCommand("USP_INSERTAR_DISLIKE", cn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@cod_usu_1", cod_usu);
+                    cmd.Parameters.AddWithValue("@cod_usu", usu.cod_usu);
                     cmd.Parameters.AddWithValue("@cod_usu_2", cod_usu_2);
                     cmd.ExecuteNonQuery();
 
@@ -205,14 +206,13 @@ namespace AppWeb_TinderTec.Controllers
 
             ViewBag.mensajeLike = mensaje;
 
-            if (mensaje != null)
+            if (mensaje != "MATCH")
             {
-                return RedirectToAction("BuscarAmistad", Buscar(codUsuarioliked));
+                return RedirectToAction("BuscarAmistad");
             }
-
-
-            return RedirectToAction("BuscarAmistad", UsuarioBuscarAmistad());
-
+            else 
+                return View("BuscarAmistad", Buscar(codUsuarioliked));
+            
         }
 
         // metodo post dislike
@@ -220,11 +220,11 @@ namespace AppWeb_TinderTec.Controllers
         [HttpPost]
         public IActionResult dislike(int codUsuarioDisliked)
         {
-            insertarDisLike(codUsuarioDisliked);
+            string validacion = insertarDisLike(codUsuarioDisliked);
             recuperarUsuario();
 
 
-            return RedirectToAction("BuscarAmistad", UsuarioBuscarAmistad());
+            return RedirectToAction("BuscarAmistad");
 
         }
 
