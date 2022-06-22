@@ -12,7 +12,7 @@ namespace AppWeb_TinderTec.Controllers
         public MeGustasController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbJorge");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
         }
 
 

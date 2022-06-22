@@ -3,31 +3,27 @@
      $("#btnBuscarAmistad").addClass("selected");
 </script>  
 
-@if (ViewBag.mensajeLike != null)
+@if (ViewBag.mensajeLike =="MATCH" )
 {
-    <!--
-    <div class="modal"  tabindex="index 100" role="dialog">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    encabezado
-                </div>
-                <div class="modal-body">
-                    <div class="cuerpo">
-                        <h1 class="animacion">Match</h1>
+     <div class="modal" id="deleteModal" tabindex="100" role="dialog" aria-labelledby="lblDeleteModal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form class="modal-content" action="BuscarAmistad" method="get">
+                    <div class="modal-header">
+                        <div class="cuerpo">
+                            <h2 class="animacion">Match</h2>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    pie
-                </div>
+                    <div class="modal-footer" style="justify-content: center !important;">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+
         </div>
-    </div>
-    -->
-    <div class="cuerpo">
-           <h2 class="animacion">Match</h2>
-           @Html.ActionLink("Buscar Amistad", "BuscarAmistad", "BuscarAmistad" )
-        </div>
+   
 }
 
 @if ( ViewBag.idValidacion == 0)
@@ -67,7 +63,7 @@ else
             
             <div class="buttons">
                     
-                @using (Html.BeginForm("like", "BuscarAmistad", FormMethod.Post)){
+                @using (Html.BeginForm("Like", "BuscarAmistad", FormMethod.Post)){
  
                                 @Html.Hidden("codUsuarioliked",Model.cod_usu)
                                 <button class="heart" style=" border:none;" ><i class="fas fa-heart"> </i> </button> }

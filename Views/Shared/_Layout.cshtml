@@ -33,6 +33,28 @@
 </head>
 
 <body id="body">
+    @if (ViewBag.mensajeLike =="MATCH" )
+{
+     <div class="modal show" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="lblDeleteModal"
+            aria-hidden="false" style="display:block">
+            <div class="modal-dialog" role="document">
+                <form class="modal-content" action="BuscarAmistad" method="get">
+                    <div class="modal-header">
+                        <div class="cuerpo">
+                            <h2 class="animacion">Match</h2>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content: center !important;">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+   
+}
     <div class="container-noBT">
         <div class="first-partition">
 
@@ -68,6 +90,7 @@
             </nav>
         </div>
         <div class="second-partition">
+
             <div class="app">
                 @RenderBody()
             </div>

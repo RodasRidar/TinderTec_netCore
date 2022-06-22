@@ -177,13 +177,13 @@ margin-top: 15vh;
     
 }
 
-    .menuDetails li a {
-        list-style: none;
-        text-decoration: none;
-        padding: 11px 28px;
-        color: black;
-        font-weight: 500;
-    }
+.menuDetails li a {
+    list-style: none;
+    text-decoration: none;
+    padding: 11px 24px;
+    color: black;
+    font-weight: 500;
+}
 
 
 

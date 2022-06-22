@@ -34,7 +34,7 @@ namespace AppWeb_TinderTec.Controllers
         public SubscripcionController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbJorge");
+            cadena = this.Configuration.GetConnectionString("myDbEduardo");
         }
 
 
