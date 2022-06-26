@@ -31,7 +31,8 @@ body{
 }
 .img_like {
     border-radius: 15px 15px 0px 0px;
-    height: 256px;
+    max-height: 32vh;
+    object-fit: cover;
 }
 .cards-container {
     overflow-y: auto;

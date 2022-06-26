@@ -235,11 +235,11 @@ p {
     padding-bottom: 50px;
 }
 
-.profile-page .gallery img {
-    max-height: 382px;
-    width: 100%;
-    margin-bottom: 2.142rem;
-}
+    .profile-page .gallery img {
+        max-height: 40vh;
+        max-width: 11vw;
+        margin-bottom: 2.142rem;
+    }
 
 .profile-page .profile .name{
     margin-top: -80px;

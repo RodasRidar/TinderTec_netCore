@@ -84,10 +84,8 @@
                 @RenderBody()
             </div>
             <header class="header">
-                <div class="logoContainer">
-                    <a href="./" class="logo">
+                <div class="logoContainer">               
                         <img src="~/css/tindertec_logo1.png" class="logoImg">
-                    </a>
                 </div>
             </header>
 
@@ -95,7 +93,8 @@
             </div>
 
             <footer class="footer">
-                <a href="./">Tindertec © 2022 Todos los derechos reservados.</a>
+                
+                @Html.ActionLink("Tindertec © 2022 Todos los derechos reservados.", "Index", "Home")
             </footer>
 
         </div>
