@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using Microsoft.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using AppWeb_TinderTec.Models;
+﻿using AppWeb_TinderTec.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json; //serializar y deserializar en json
+using System.Data;
 
 namespace AppWeb_TinderTec.Controllers
 {
@@ -15,19 +13,19 @@ namespace AppWeb_TinderTec.Controllers
         public HomeController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbEduardo");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
         public async Task<IActionResult> Index()
         {
 
 
-                Usuario usu = new Usuario();
-                usu =  JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
 
-                ViewBag.nombre = usu.nombres;
-                ViewBag.edad = usu.edad;
-                ViewBag.fotoURL = usu.foto1;
+            ViewBag.nombre = usu.nombres;
+            ViewBag.edad = usu.edad;
+            ViewBag.fotoURL = usu.foto1;
 
             return View(await Task.Run(() => usu));
         }

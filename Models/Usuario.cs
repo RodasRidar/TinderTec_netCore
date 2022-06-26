@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
 
 namespace AppWeb_TinderTec.Models
 {
@@ -7,7 +6,7 @@ namespace AppWeb_TinderTec.Models
     public class Usuario
     {
 
-   
+
         [Display(Name = "Codigo")]
         public int cod_usu { get; set; }
 
@@ -17,7 +16,7 @@ namespace AppWeb_TinderTec.Models
         [Display(Name = "Correo")]
         public string email { get; set; }
 
-   
+
         [Display(Name = "Contraseña")]
         public string clave { get; set; }
 
@@ -28,11 +27,11 @@ namespace AppWeb_TinderTec.Models
         public string foto4 { get; set; }
         public string foto5 { get; set; }
         public DateTime fecha_naci { get; set; }
-        public int edad { get { return ((DateTime.Now - fecha_naci).Days)/365; } }
+        public int edad { get { return ((DateTime.Now - fecha_naci).Days) / 365; } }
 
-        
 
-        public string carrera { get; set; } 
+
+        public string carrera { get; set; }
         public int cod_carrera { get; set; }
         public string sede { get; set; }
 
@@ -42,9 +41,9 @@ namespace AppWeb_TinderTec.Models
 
         public string interes { get; set; }
 
-        public int cod_interes{ get; set; }
+        public int cod_interes { get; set; }
 
-        public int cod_genero{ get; set; }
+        public int cod_genero { get; set; }
 
         public string genero { get; set; }
 

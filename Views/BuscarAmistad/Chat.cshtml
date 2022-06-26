@@ -24,17 +24,17 @@
                     <div class="action_menu" >
 
                     
-                       <ul>
+                       <ul> <!--
                             <li>
-                                 @using (Html.BeginForm("VerPerfil", "BuscarAmistad", FormMethod.Post,new{@class="input-group"})){
-                                 @Html.Hidden("usu_envia",i)
+                                  using (Html.BeginForm("VerPerfil", "BuscarAmistad", FormMethod.Post,new{class="input-group"})){
+                                 Html.Hidden("usu_envia",i)
                         
-                                <button class="btn" style="color :white"><i class="fas fa-user-circle"></i>Ver Perfil</button> }
-                            </li>
+                                <button class="btn" style="color :white ;  background: transparent;"><i class="fas fa-user-circle"></i>Ver Perfil</button> }
+                            </li> -->
                             <li>
                                 @using (Html.BeginForm("CancelarMatch", "BuscarAmistad", FormMethod.Post,new{@class="input-group"})){
                                  @Html.Hidden("usu_envia",i)
-                                <button class="btn" style="color :white"><i class="fas fa-trash"></i>Cancelar Match</button>}
+                                <button class="btn" style="color :white ; background: transparent;"><i class="fas fa-trash"></i>Cancelar Match</button>}
                             </li>
                         </ul>
                     </div>

@@ -5,24 +5,26 @@
 
 @if (ViewBag.mensajeLike =="MATCH" )
 {
-     <div class="modal" id="deleteModal" tabindex="100" role="dialog" aria-labelledby="lblDeleteModal"
+     <div class="modal card" id="deleteModal" tabindex="100" role="dialog" aria-labelledby="lblDeleteModal" style="display:block;height: auto;"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <form class="modal-content" action="BuscarAmistad" method="get">
+                <form class="modal-content" action="BuscarAmistad" method="get" style="align-items:center">
                     <div class="modal-header">
-                        <div class="cuerpo">
+                        <div >
                             <h2 class="animacion">Match</h2>
                         </div>
                     </div>
                     <div class="modal-footer" style="justify-content: center !important;">
                         <div>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <button type="submit" class="btn btn-primary" style=" background-color: #fc4c6c; color: white; padding: 14px 20px;margin-bottom: 8px; border: none;border-radius: 4px;cursor: pointer;font-family: Roboto Slab;" >Aceptar</button>
+                            @Html.ActionLink("Ir a mis Matchs", "Matchs", "BuscarAmistad")
                         </div>
                     </div>
                 </form>
             </div>
 
-        </div>
+        </div> 
+   
    
 }
 

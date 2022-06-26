@@ -6,7 +6,7 @@
         private string nombres_1 { get; set; }
 
         private int cod_usu_like { get; set; }
-        private string nombres_2 { get; set; }   
+        private string nombres_2 { get; set; }
 
         private int id_match { get; set; }
 

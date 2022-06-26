@@ -18,8 +18,7 @@ namespace AppWeb_TinderTec.Controllers
         public UsuarioController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-           // cadena = this.Configuration.GetConnectionString("myDbPierina");
-            cadena = this.Configuration.GetConnectionString("myDbEduardo");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
         private void recuperarUsuario()
@@ -33,13 +32,13 @@ namespace AppWeb_TinderTec.Controllers
             ViewBag.fotoURL = usu.foto1;
         }
 
-    
+
         [HttpGet]
         public async Task<IActionResult> RegistrarUsuario()
         {
 
-            
-            @ViewBag.sedes=new SelectList(await Task.Run(() => Sedes()), "Id", "Name");
+
+            @ViewBag.sedes = new SelectList(await Task.Run(() => Sedes()), "Id", "Name");
             @ViewBag.carreras = new SelectList(await Task.Run(() => Carreras()), "Id", "Name");
             @ViewBag.genero = new SelectList(await Task.Run(() => Genero()), "Id", "Name");
             @ViewBag.generoInteres = new SelectList(await Task.Run(() => Interes()), "Id", "Name");
@@ -55,13 +54,13 @@ namespace AppWeb_TinderTec.Controllers
         {
 
             string msj = saveUsuario(usu);
-            if (msj== "Ups!,Ocurrio un problema en el registro")
+            if (msj == "Ups!,Ocurrio un problema en el registro")
             {
                 @ViewBag.sedes = new SelectList(await Task.Run(() => Sedes()), "Id", "Name");
                 @ViewBag.carreras = new SelectList(await Task.Run(() => Carreras()), "Id", "Name");
                 @ViewBag.genero = new SelectList(await Task.Run(() => Genero()), "Id", "Name");
                 @ViewBag.generoInteres = new SelectList(await Task.Run(() => Interes()), "Id", "Name");
-                ViewBag.msjRegistro=msj;
+                ViewBag.msjRegistro = msj;
                 return View(await Task.Run(() => new Usuario()));
             }
             else
@@ -69,9 +68,9 @@ namespace AppWeb_TinderTec.Controllers
                 TempData["msj"] = msj;
                 return RedirectToAction("Login", "Seguridad");
             }
-           
 
-           
+
+
 
         }
 
@@ -116,17 +115,17 @@ namespace AppWeb_TinderTec.Controllers
             {
                 ViewBag.msjConfirmacionAddFoto = TempData["msjConfirmacionAddFoto"].ToString();
             }
-            
+
 
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Mantener(Usuario  user)
+        public async Task<IActionResult> Mantener(Usuario user)
         {
             recuperarUsuario();
             string msj = updateUsuario(user, cod_current_usu);
-            if (msj== "¡Se actualizo el usuario correctamente!")
+            if (msj == "¡Se actualizo el usuario correctamente!")
             {
 
                 ViewBag.msjConfirmacionEditarPerfil = msj;
@@ -207,7 +206,7 @@ namespace AppWeb_TinderTec.Controllers
                 ViewBag.sede = new SelectList(await Task.Run(() => SedesSolo()), "Id", "Name");
                 ViewBag.carrera = new SelectList(await Task.Run(() => CarrerasSolo()), "Id", "Name");
             }
-           
+
 
 
             return View();
@@ -239,10 +238,10 @@ namespace AppWeb_TinderTec.Controllers
                 }
                 addphoto(cod_current_usu, fotoPosicion, url_foto);
                 TempData["msjConfirmacionAddFoto"] = "¡Foto agregada exitosamente!";
-              
+
                 return RedirectToAction("Mantener");
             }
-           catch (Exception ex)
+            catch (Exception ex)
             {
                 recuperarUsuario();
                 int fotoPosicion = 1;
@@ -272,7 +271,8 @@ namespace AppWeb_TinderTec.Controllers
         [HttpPost]
         public async Task<IActionResult> Eliminar()
         {
-            try{
+            try
+            {
                 recuperarUsuario();
                 eliminarUsuario(cod_current_usu);
                 TempData["msj"] = "¡Se elimino la cuenta exitosamente!";
@@ -287,7 +287,7 @@ namespace AppWeb_TinderTec.Controllers
 
         }
 
-        private void addphoto(int id,int posicion,string url)
+        private void addphoto(int id, int posicion, string url)
         {
             using (SqlConnection cn = new SqlConnection(cadena))
             {
@@ -305,21 +305,21 @@ namespace AppWeb_TinderTec.Controllers
 
         private void eliminarUsuario(int id)
         {
-            
+
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 cn.Open();
 
                 SqlCommand cmd = new SqlCommand("USP_USUARIO_ELIMINAR", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@codigo_usuario", id);
-                    cmd.ExecuteNonQuery();
-                    cn.Close();     
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@codigo_usuario", id);
+                cmd.ExecuteNonQuery();
+                cn.Close();
             }
 
         }
 
-        private string updateUsuario(Usuario u,int id)
+        private string updateUsuario(Usuario u, int id)
         {
 
             string msjConfirmation = " ";
@@ -382,7 +382,7 @@ namespace AppWeb_TinderTec.Controllers
 
         private string saveUsuario(Usuario u)
         {
-    
+
             string msjConfirmation = " ";
             using (SqlConnection cn = new SqlConnection(cadena))
             {
@@ -392,7 +392,7 @@ namespace AppWeb_TinderTec.Controllers
                     SqlCommand cmd = new SqlCommand("USP_USUARIO_REGISTRAR", cn);
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nombre",u.nombres );
+                    cmd.Parameters.AddWithValue("@nombre", u.nombres);
                     cmd.Parameters.AddWithValue("@correo", u.email);
                     cmd.Parameters.AddWithValue("@fecnac", u.fecha_naci);
                     cmd.Parameters.AddWithValue("@clave", u.clave);
@@ -401,9 +401,9 @@ namespace AppWeb_TinderTec.Controllers
                     cmd.Parameters.AddWithValue("@idgenero", u.cod_genero);
                     cmd.Parameters.AddWithValue("@idinteres", u.cod_interes);
                     cmd.Parameters.AddWithValue("@desc", u.descripcion);
-                    cmd.Parameters.AddWithValue("@f1",u.foto1 );
+                    cmd.Parameters.AddWithValue("@f1", u.foto1);
                     cmd.ExecuteNonQuery();
-                    msjConfirmation = "¡Se registro el usuario "+u.nombres+ " correctamente!";
+                    msjConfirmation = "¡Se registro el usuario " + u.nombres + " correctamente!";
                 }
                 catch (Exception ex)
                 {
@@ -544,8 +544,8 @@ namespace AppWeb_TinderTec.Controllers
                     usu.foto4 = dr.GetString(4);
                     usu.foto5 = dr.GetString(5);
                     usu.fecha_naci = dr.GetDateTime(6);
-                    usu.cod_carrera= dr.GetInt32(7);
-                    usu.cod_interes= dr.GetInt32(8);
+                    usu.cod_carrera = dr.GetInt32(7);
+                    usu.cod_interes = dr.GetInt32(8);
                     usu.cod_sede = dr.GetInt32(9);
                     usu.descripcion = dr.GetString(10);
                 }

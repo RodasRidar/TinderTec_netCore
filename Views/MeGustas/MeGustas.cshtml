@@ -1,4 +1,79 @@
-﻿  <script type="text/javascript">
+﻿
+<script type="text/javascript">
      $("#btnMeGustas").addClass("selected");
 </script>  
-<h1>GESTIONAR ME GUSTAS:HANSEL</h1>
+@model IEnumerable<AppWeb_TinderTec.Models.Usuario>
+@{
+    ViewData["Title"] = "Tindertec | MeGustas";
+}
+
+
+    @if(ViewBag.MeGustasVacios == null)
+    {
+            <div class="cards-container">
+                    <div class="row pb-5 mb-4" >
+                                  <div class="col-lg-3 col-md-6 mb-4 mb-lg-5">
+                                    <div class="card shadow-sm border-0 m-2">
+                                      <div class="card-body p-0 like_img">
+                                        <div class="p-4"> 
+                                            <div class="img_user">
+                                            <img src="~/imagenes/fantasma.gif"
+                                            alt="" class="">
+                                          </div>
+                                        <button class="btn dislikebtn">@Html.ActionLink("Buscar","buscarAmistad" )<i class="fa-solid fa-plus"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+    }
+@if (ViewBag.MeGustasVacios != null)
+{<div class="cards-container" >
+						
+                    <div class="row pb-5 mb-4" >
+
+                        @foreach (var item in Model) {
+                                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-5" > 
+                                        <div class="card shadow-sm border-0 m-2">
+                                            <div class="card-body p-0 like_img">
+                                                <div class="like_img_container">
+                                                    <img src="@Html.DisplayFor(modelItem => item.foto1)"alt="" class="w-100 img_like">
+                                                </div>
+
+                                                <div class="p-2" style="text-align: center;">
+                                                    <h5 class="mb-0" >@Html.DisplayFor(modelItem => item.nombres)</h5>
+                                                    <p class="small mb-0" >@Html.DisplayFor(modelItem => item.carrera)</p>
+                                                    <p class="small mb-0" >@Html.DisplayFor(modelItem => item.sede)</p>
+
+                                                    @using (Html.BeginForm("Dislike", "MeGustas", FormMethod.Post)){
+
+                                                      @Html.Hidden("cod_usu",item.cod_usu)
+                                                      <button class="btn dislikebtn"><i class="fa-solid fa-thumbs-down"></i></button>   
+                                                     }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            }
+                                  <div class="col-lg-3 col-md-6 mb-4 mb-lg-5">
+                                    <div class="card shadow-sm border-0 m-2">
+                                      <div class="card-body p-0 like_img">
+                                        <div class="p-4"> 
+                                            <div class="img_user">
+                                            <img src="~/imagenes/fantasma.gif"
+                                            alt="" class="">
+                                          </div>
+                                        <button class="btn dislikebtn">@Html.ActionLink("Buscar","buscarAmistad" )<i class="fa-solid fa-plus"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                    </div>
+                </div>
+    
+}
+
+
+    

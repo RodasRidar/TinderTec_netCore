@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
+﻿using AppWeb_TinderTec.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using AppWeb_TinderTec.Models;
-using AppWeb_TinderTec.Controllers;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace AppWeb_TinderTec.Controllers
 {
@@ -17,9 +15,7 @@ namespace AppWeb_TinderTec.Controllers
         public BuscarAmistadController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbEduardo");
-            //cadena = this.Configuration.GetConnectionString("myDbJorge");
-            //cadena = this.Configuration.GetConnectionString("myDbRichardWork");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
         private void recuperarUsuario()
@@ -72,7 +68,7 @@ namespace AppWeb_TinderTec.Controllers
         //metodo para insertar el like
         string insertarLike(int cod_usuario2)
         {
-   
+
             string mensaje = "";
             Usuario usu = new Usuario();
             usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
@@ -95,7 +91,7 @@ namespace AppWeb_TinderTec.Controllers
                     {
                         mensaje = match;
                     }
-                    
+
 
 
                 }
@@ -132,7 +128,7 @@ namespace AppWeb_TinderTec.Controllers
 
 
                     mensaje = "DISLIKE";
-                   
+
 
                 }
                 catch (Exception e)
@@ -210,9 +206,9 @@ namespace AppWeb_TinderTec.Controllers
             {
                 return RedirectToAction("BuscarAmistad");
             }
-            else 
+            else
                 return View("BuscarAmistad", Buscar(codUsuarioliked));
-            
+
         }
 
         // metodo post dislike
@@ -243,14 +239,14 @@ namespace AppWeb_TinderTec.Controllers
             //ViewBag.lstMatch = lstMatch();
             string MSJdeleteMatchAndMsj;
 
-           if  ( HttpContext.Session.GetString("MSJdeleteMatchAndMsj") == null || HttpContext.Session.GetString("MSJdeleteMatchAndMsj") =="")
+            if (HttpContext.Session.GetString("MSJdeleteMatchAndMsj") == null || HttpContext.Session.GetString("MSJdeleteMatchAndMsj") == "")
             {
-               
+
                 MSJdeleteMatchAndMsj = "";
             }
             else
             {
-                 MSJdeleteMatchAndMsj = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("MSJdeleteMatchAndMsj"));
+                MSJdeleteMatchAndMsj = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("MSJdeleteMatchAndMsj"));
             }
 
             ViewBag.MSJdeleteMatchAndMsj = MSJdeleteMatchAndMsj;
@@ -260,7 +256,7 @@ namespace AppWeb_TinderTec.Controllers
             if (lstMatch().Any())
             {
                 return View(await Task.Run(() => ViewBag.lstMatch = lstMatch()));
-                
+
             }
             else
             {
@@ -268,7 +264,7 @@ namespace AppWeb_TinderTec.Controllers
                 return View(await Task.Run(() => ViewBag.lstMatch = lstMatch()));
             }
             // return View();
-            
+
         }
 
 
@@ -286,7 +282,7 @@ namespace AppWeb_TinderTec.Controllers
 
 
             if (lstChat(match.id).Any())
-            
+
             {
                 recuperarUsuario();
                 ViewBag.cod_usu_now = cod_usu;
@@ -306,8 +302,8 @@ namespace AppWeb_TinderTec.Controllers
                 ViewBag.id = match.id;
                 return View(await Task.Run(() => ViewBag.lstChat = new List<Chat>()));
             }
-        }   
-            public async Task<IActionResult> Chat()
+        }
+        public async Task<IActionResult> Chat()
 
         {
 
@@ -326,10 +322,10 @@ namespace AppWeb_TinderTec.Controllers
         //-------------------------------------------------------------- ENVIAR MENSAJE
 
         [HttpPost]
-        public async Task<IActionResult> EnviarMensaje(int usu_envia , string mensaje)
+        public async Task<IActionResult> EnviarMensaje(int usu_envia, string mensaje)
         {
-            
-            ViewBag.mensaje = sendMsj( usu_envia,  mensaje);//usar el mensaje para poner verificacion de entrega del mensajes ✅
+
+            ViewBag.mensaje = sendMsj(usu_envia, mensaje);//usar el mensaje para poner verificacion de entrega del mensajes ✅
 
 
 
@@ -343,7 +339,7 @@ namespace AppWeb_TinderTec.Controllers
         public async Task<IActionResult> VerPerfil(int usu_envia)
         {
 
-            
+
 
 
 
@@ -391,7 +387,7 @@ namespace AppWeb_TinderTec.Controllers
             return lstMatch;
         }
 
-     
+
         IEnumerable<Chat> lstChat(int cod_usu_match)
         {
             List<Chat> lstChat = new List<Chat>();
@@ -413,7 +409,7 @@ namespace AppWeb_TinderTec.Controllers
                         cod_usu1 = dr.GetInt32(1),
                         cod_usu2 = dr.GetInt32(2),
                         mensaje = dr.GetString(3),
-                        fecha = dr.GetDateTime(4), 
+                        fecha = dr.GetDateTime(4),
                         ft_u1 = dr.GetString(5),
                         nombres = dr.GetString(6)
 

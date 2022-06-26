@@ -1,20 +1,15 @@
 ﻿using AppWeb_TinderTec.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 using System.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppWeb_TinderTec.Controllers
 {
     public class SubscripcionController : Controller
     {
         /*********************************************************************/
-        
+
 
         //VARIABLES GLOBALES
 
@@ -34,7 +29,7 @@ namespace AppWeb_TinderTec.Controllers
         public SubscripcionController(IConfiguration _configuration)
         {
             Configuration = _configuration;
-            cadena = this.Configuration.GetConnectionString("myDbEduardo");
+            cadena = this.Configuration.GetConnectionString("myDbRichardHome");
         }
 
 
@@ -45,8 +40,8 @@ namespace AppWeb_TinderTec.Controllers
 
         private void recuperarUsuario()
         {
-           Usuario usu = new Usuario();
-           usu= JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
+            Usuario usu = new Usuario();
+            usu = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("_User"));
 
             //Seteamos nuestra variable global cod_usu_actual con el código
             //de usuario que esta en sesion
@@ -82,7 +77,7 @@ namespace AppWeb_TinderTec.Controllers
                 while (dr.Read())
                 {
                     listaSubscripciones.Add(new Concepto_Planes()
-                    { 
+                    {
                         cod_plan = dr.GetInt32(0),
                         nom_plan = dr.GetString(1),
                         desc_plan = dr.GetString(2),
@@ -240,7 +235,7 @@ namespace AppWeb_TinderTec.Controllers
 
         /*********************************************************************/
 
-        
+
         //GET de vista "Carrito" (En esta vista vemos un listado de los planes que
         //se han ido agregando en el session de "canasta"). Además tambien podremos
         //eliminar planes que ya habiamos añadido a nuestro carrito, eso gracias
@@ -295,7 +290,7 @@ namespace AppWeb_TinderTec.Controllers
 
         //GET de vista "Subscripcion" (Esta vista nos devuelve un listado de
         //todos los planes que hemos añadido a nuestro carrito).
-        
+
         public async Task<IActionResult> Subscripcion()
         {
             recuperarUsuario();
@@ -308,7 +303,7 @@ namespace AppWeb_TinderTec.Controllers
 
         }
 
-        
+
         /*********************************************************************/
 
 
@@ -349,12 +344,13 @@ namespace AppWeb_TinderTec.Controllers
                     cmd.Parameters.AddWithValue("@cod_med_pago", cod_medio_pago);
                     cmd.Parameters.AddWithValue("@dias", aux.Sum(x => x.total_dias));
                     cmd.ExecuteNonQuery();
-                    
+
                     //almaceno el valor del parametro @cod_sub
                     String codigo_sub = cmd.Parameters["@cod_sub"].Value.ToString();
 
                     //2.ejecutar el procedure donde insertamos el detalle de subscripcion
-                    aux.ForEach(x => {
+                    aux.ForEach(x =>
+                    {
                         cmd = new SqlCommand("exec USP_INSERTAR_DETALLE_SUBSCRIPCION @cod_sub, @cod_plan, @cantidad, @precio, @dias", cn, tr);
                         cmd.Parameters.AddWithValue("@cod_sub", codigo_sub);
                         cmd.Parameters.AddWithValue("@cod_plan", x.cod_plan);
